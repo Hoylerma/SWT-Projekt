@@ -85,8 +85,5 @@ Die Beziehung ist **1 zu n**: ein Rezept hat mehrere Zutatenzeilen, eine Zutaten
 - **Fehlerfall:** Antwortet der Dienst nicht, fehlerhaft oder zu spät, läuft die Suche ohne Saison-Bevorzugung weiter und der Nutzer sieht einen Hinweis (FR-12, NFR-02).
 - **Warum der Dienst nicht in jedem automatisierten Test live aufgerufen werden soll:** Sein Ergebnis hängt vom Datum ab und ist damit **nicht deterministisch**, er braucht eine **Netzwerkverbindung**, und ein einziger Aufruf genügt, weil sich die Saison nur viermal im Jahr ändert. In automatisierten Tests wird er deshalb durch eine Ersatzimplementierung mit **kontrollierten Antworten** ersetzt (auch für Fehlerfälle). Das ist durch die Kapselung in NFR-06 möglich.
 
-## 5 Abgrenzung (nicht im Umfang)
-
-Wir bauen **nicht**: Einkaufsliste, Nährwert-Informationen, Bewertungssystem (Rating), Benachrichtigung bei aufgebrauchten Zutaten (aus `docs/app.md`), außerdem Benutzerkonten, Verwaltung eines dauerhaften Kühlschrank-Bestands (die Auswahl gilt nur pro Suche), Import von Rezepten aus anderen Quellen, Bilder und Preisangaben.
 
 
