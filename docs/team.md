@@ -16,6 +16,10 @@ Max Ulrich-Ziska
 Matrikelnummer: 778453
 Github: kiritoqun
 
+Sefa Yokus
+Matrikelnummer: 768516
+Github: seyoit01
+
 Repository/CI maintainer: Hoylerma
 Architecture Owner: Fabi
 Test Lead: Max
