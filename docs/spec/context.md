@@ -4,17 +4,16 @@
 
 Das System **WG Cook** ist eine Box. Akteure und externe Systeme stehen außerhalb, jede Linie ist eine Interaktion. Die Datenbank gehört zum System und steht deshalb nicht als eigenes Element außerhalb.
 
-```mermaid
-flowchart LR
+%%{init: {"flowchart": {"nodeSpacing": 80, "rankSpacing": 120}}}%%
+flowchart TB
     NUTZER["WG-Mitglied<br/>(Nutzer)"]
     SYS["WG Cook<br/>(Web-Oberfläche, REST-API,<br/>Geschäftslogik, Datenbank)"]
     KAL["Kalender-Dienst<br/>(externes System)"]
 
-    NUTZER -->|"Rezepte anlegen, ändern, löschen;<br/>Zutaten auswählen; Rezepte suchen<br/>und ansehen"| SYS
-    SYS -->|"Rezeptliste mit Abdeckung und<br/>fehlenden Zutaten, Rezeptdetails,<br/>Hinweise und Fehlermeldungen"| NUTZER
-     SYS -->|"fragt aktuelles Datum an"| KAL
-    KAL -->|"liefert Datum<br/>(oder Fehler/Timeout)"| SYS
-```
+    NUTZER -->|"1 Anfragen"| SYS
+    SYS -->|"2 Ergebnisse"| NUTZER
+    SYS -->|"3 Datum anfragen"| KAL
+    KAL -->|"4 Datum oder Fehler"| SYS
 
 ## 2 Erklärung der Elemente und Beziehungen
 
