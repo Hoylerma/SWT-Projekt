@@ -12,7 +12,7 @@ flowchart LR
 
     NUTZER -->|"Rezepte anlegen, ändern, löschen;<br/>Zutaten auswählen; Rezepte suchen<br/>und ansehen"| SYS
     SYS -->|"Rezeptliste mit Abdeckung und<br/>fehlenden Zutaten, Rezeptdetails,<br/>Hinweise und Fehlermeldungen"| NUTZER
-    SYS -->|"fragt aktuelles Datum an"| KAL
+     SYS -->|"fragt aktuelles Datum an"| KAL
     KAL -->|"liefert Datum<br/>(oder Fehler/Timeout)"| SYS
 ```
 
