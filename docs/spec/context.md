@@ -3,7 +3,7 @@
 ## 1 Kontextdiagramm
 
 Das System **WG Cook** ist eine Box. Akteure und externe Systeme stehen außerhalb, jede Linie ist eine Interaktion. Die Datenbank gehört zum System und steht deshalb nicht als eigenes Element außerhalb.
-
+´´´mermaid
 %%{init: {"flowchart": {"nodeSpacing": 80, "rankSpacing": 120}}}%%
 flowchart TB
     NUTZER["WG-Mitglied<br/>(Nutzer)"]
@@ -14,6 +14,7 @@ flowchart TB
     SYS -->|"2 Ergebnisse"| NUTZER
     SYS -->|"3 Datum anfragen"| KAL
     KAL -->|"4 Datum oder Fehler"| SYS
+´´´
 
 ## 2 Erklärung der Elemente und Beziehungen
 
