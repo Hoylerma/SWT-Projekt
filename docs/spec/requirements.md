@@ -1,3 +1,5 @@
+KI Anwendung: Claude Sonnet 5.5, gesammelte Notizen ausformuliert, visuell fertig gestellt (Diagramme) und inhaltich mit der Laboraufgabe abgeprüft.
+
 ### Begriffe
 
 | Begriff                  | Bedeutung                                                                                                                                                |
