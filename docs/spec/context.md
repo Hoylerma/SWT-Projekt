@@ -5,12 +5,13 @@ KI Anwendung: Claude Sonnet 5.5, gesammelte Notizen ausformuliert, visuell ferti
 Das System **WG Cook** ist eine Box. Akteure und externe Systeme stehen außerhalb, jede Linie ist eine Interaktion. Die Datenbank gehört zum System und steht deshalb nicht als eigenes Element außerhalb.
 
 ```mermaid
+%%{init: {"flowchart": {"nodeSpacing": 80, "rankSpacing": 220, "curve": "basis"}}}%%
 flowchart LR
     A["<b>WG Cook</b><br/>Web-Oberfläche<br/>REST-API<br/>Datenbank<br/>Geschäftslogik"]
     B["<b>Kalenderdienst</b><br/>(externes System)"]
 
-    A -- "Datum anfragen für saisonale Gerichte und besondere Anlässe (Geburtstage etc.)" --> B
-    B -- "Datum zurückliefern" --> A
+    A -- "Datum anfragen für<br/>saisonale Gerichte und<br/>besondere Anlässe<br/>(Geburtstage etc.)" --> B
+    B -- "Datum<br/>zurückliefern" --> A
 ```
 
 ## 2 Erklärung der Elemente und Beziehungen
