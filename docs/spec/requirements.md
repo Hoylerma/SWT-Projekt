@@ -9,7 +9,7 @@ KI Anwendung: Claude Sonnet 5.5, gesammelte Notizen ausformuliert, visuell ferti
 | **Auswahl**              | Die Zutaten, die ein WG-Mitglied für eine Suche als "vorhanden" markiert. Sie gilt nur für die aktuelle Suche und wird nicht dauerhaft gespeichert.      |
 | **Abdeckung**            | Anteil der Zutaten eines Rezepts, die in der Auswahl enthalten sind (Anzahl abgedeckter Zutaten geteilt durch Gesamtzahl der Zutaten des Rezepts).       |
 | **Saison**               | Frühling, Sommer, Herbst oder Winter. Jedes Rezept ist einer Saison oder "ganzjährig" zugeordnet.                                                        |
-| **Kalender-Dienst**      | Externe Abhängigkeit. Liefert das aktuelle Datum, aus dem das System die aktuelle Saison ableitet.                                                       |
+| **Kalender-Dienst**      | Externe Abhängigkeit. Liefert das aktuelle Datum, aus dem das System die aktuelle Saison und besondere Anlässe ableitet.                                                       |
 |                          |                                                                                                                                                          |
 
 ## 2 User Requirements (Problemraum)
@@ -21,10 +21,11 @@ KI Anwendung: Claude Sonnet 5.5, gesammelte Notizen ausformuliert, visuell ferti
 | UR-02 | Als WG-Mitglied möchte ich ein Rezept mit allen Zutaten und Mengen ansehen.                                                       | Wir wissen, was wir brauchen.                                         |
 | UR-03 | Als WG-Mitglied möchte ich sehen, welche Zutaten für ein Rezept noch fehlen.                                                      | Wir entscheiden, ob wir es kochen oder noch etwas besorgen.           |
 | UR-04 | Als WG-Mitglied möchte ich, dass saisonal passende Rezepte bevorzugt vorgeschlagen werden.                                        | Die Vorschläge passen zur Jahreszeit.                                 |
-| UR-05 | Als WG-Mitglied möchte ich den Rezeptbestand pflegen (Rezepte anlegen, ändern, löschen).                                          | Die Anwendung enthält die Rezepte, die wir wirklich kochen.           |
-| UR-06 | Als WG möchten wir die Anwendung gemeinsam und ohne Anmeldung nutzen.                                                             | Kein Aufwand durch Konten, jede Person sieht denselben Rezeptbestand. |
-| UR-07 | Als WG-Mitglied möchte ich die Anwendung am Laptop und am Smartphone nutzen.                                                      | Wir benutzen sie in der Küche mit dem Handy.                          |
-| UR-08 | Als WG-Mitglied möchte ich verständliche Rückmeldungen bei falschen Eingaben und wenn ein Teil der Anwendung nicht verfügbar ist. | Wir wissen, was wir tun müssen und die Anwendung bleibt benutzbar.    |
+| UR-05 | Als WG-Mitglied möchte ich, dass passende Rezepte bei besonderen Anlässen aus dem Kalender bevorzugt vorgeschlagen werden. | Die Vorschläge passen zu Kalenderereignissen.|
+| UR-06 | Als WG-Mitglied möchte ich den Rezeptbestand pflegen (Rezepte anlegen, ändern, löschen).                                          | Die Anwendung enthält die Rezepte, die wir wirklich kochen.           |
+| UR-07 | Als WG möchten wir die Anwendung gemeinsam und ohne Anmeldung nutzen.                                                             | Kein Aufwand durch Konten, jede Person sieht denselben Rezeptbestand. |
+| UR-08 | Als WG-Mitglied möchte ich die Anwendung am Laptop und am Smartphone nutzen.                                                      | Wir benutzen sie in der Küche mit dem Handy.                          |
+| UR-09 | Als WG-Mitglied möchte ich verständliche Rückmeldungen bei falschen Eingaben und wenn ein Teil der Anwendung nicht verfügbar ist. | Wir wissen, was wir tun müssen und die Anwendung bleibt benutzbar.    |
 
 ## 3 System Requirements (Lösungsraum)
 
@@ -34,20 +35,20 @@ KI Anwendung: Claude Sonnet 5.5, gesammelte Notizen ausformuliert, visuell ferti
 | ID | Anforderung | Herleitung | Prio |
 |---|---|---|---|
 | FR-01 | Das System ermöglicht, ein **Rezept anzulegen** mit: Name (Pflicht, 1 bis 100 Zeichen), Portionszahl (Pflicht, ganze Zahl von 1 bis 20), Beschreibung (optional, höchstens 2000 Zeichen), Zubereitungsschritte (optional, höchstens 5000 Zeichen), Saison (Frühling, Sommer, Herbst, Winter oder ganzjährig, Standard ganzjährig) und **mindestens einer Zutatenzeile**. | UR-05 | Must |
-| FR-02 | Eine **Zutatenzeile** besteht aus Zutatenname (Pflicht, 1 bis 60 Zeichen), Menge (Pflicht, Zahl größer 0 und höchstens 99999) und Einheit (Pflicht, aus der Liste g, kg, ml, l, Stück, EL, TL). Ein Zutatenname darf in einem Rezept **nur einmal** vorkommen (Groß-/Kleinschreibung wird nicht unterschieden). | UR-02, UR-05 | Must |
+| FR-02 | Eine **Zutatenzeile** besteht aus Zutatenname (Pflicht, 1 bis 60 Zeichen), Menge (Pflicht, Zahl größer 0 und höchstens 99999) und Einheit (Pflicht, aus der Liste g, kg, ml, l, Stück, EL, TL). Ein Zutatenname darf in einem Rezept **nur einmal** vorkommen (Groß-/Kleinschreibung wird nicht unterschieden). | UR-02, UR-06 | Must |
 | FR-03 | Das System zeigt eine **Liste** mit allen in der Datenbank hinterlegten Rezepten an (alphabetisch nach Name). | UR-02 | Must |
 | FR-04 | Das System zeigt ein einzelnes Rezept mit **allen Details und allen Zutatenzeilen** an. | UR-02 | Must |
-| FR-05 | Das System ermöglicht, an einem bestehenden Rezept Zutatenzeilen **hinzuzufügen und zu entfernen** sowie die Rezeptdaten zu ändern. Ein Rezept muss mindestens eine Zutatenzeile behalten. | UR-05 | Should |
-| FR-06 | Das System ermöglicht, ein Rezept zu **löschen**. Die zugehörigen Zutatenzeilen werden mitgelöscht. | UR-05 | Should |
+| FR-05 | Das System ermöglicht, an einem bestehenden Rezept Zutatenzeilen **hinzuzufügen und zu entfernen** sowie die Rezeptdaten zu ändern. Ein Rezept muss mindestens eine Zutatenzeile behalten. | UR-06 | Should |
+| FR-06 | Das System ermöglicht, ein Rezept zu **löschen**. Die zugehörigen Zutatenzeilen werden mitgelöscht. | UR-06 | Should |
 | FR-07 | Das System bietet eine **Zutatenauswahl**: Der Nutzer kann eine oder mehrere Zutaten markieren. Zur Auswahl stehen alle im System bekannten Zutatennamen (aus den Zutatenzeilen aller Rezepte), mit Suche nach Teiltext. | UR-01 | Must |
 | FR-08 | Das System ermittelt zu einer Auswahl für **jedes Rezept die Abdeckung** und liefert alle Rezepte mit Abdeckung größer 0. Rezepte ohne eine einzige ausgewählte Zutat werden nicht angezeigt. | UR-01 | Must |
 | FR-09 | Das System **sortiert** die Treffer in dieser Reihenfolge: (1) Abdeckung absteigend, (2) bei gleicher Abdeckung zuerst Rezepte der **aktuellen Saison**, danach ganzjährige, danach Rezepte anderer Saisons, (3) alphabetisch nach Name. | UR-01, UR-04 | Must |
 | FR-10 | Das System zeigt je Treffer an, **wie viele Zutaten abgedeckt sind** (z. B. "3 von 5") und **welche Zutaten fehlen**. Rezepte mit Abdeckung 100 % werden als **"vollständig"** gekennzeichnet. | UR-03 | Must |
 | FR-11 | Das System ermittelt die **aktuelle Saison** über den **externen Kalender-Dienst**. Aus dem gelieferten Datum wird die Saison abgeleitet: Dezember bis Februar Winter, März bis Mai Frühling, Juni bis August Sommer, September bis November Herbst. | UR-04 | Should |
 | FR-12 | Die vom Kalender-Dienst gelieferte Saison wird **zwischengespeichert** (höchstens 24 Stunden), damit der Dienst nicht bei jeder Suche aufgerufen wird. | UR-04 | Should |
-| FR-13 | Antwortet der Kalender-Dienst **nicht innerhalb von 2 Sekunden**, liefert er einen Fehler oder eine **ungültige Antwort**, wird die Suche **ohne Saison-Bevorzugung** (Sortierung nach FR-08 ohne Punkt 2) fortgesetzt. Das System zeigt einen **sichtbaren Hinweis** ("Saisonale Sortierung ist gerade nicht verfügbar"). Es gibt **keinen Abbruch und keine Fehlerseite**, und es wird **nichts doppelt gespeichert**. | UR-04, UR-08 | Must |
-| FR-14 | Das System **prüft alle Eingaben** (Pflichtfelder, Längen, Wertebereiche aus FR-01 und FR-02) und lehnt ungültige Eingaben mit einer **verständlichen Meldung** ab. Der Datenbestand bleibt dabei unverändert. Wird ein nicht vorhandenes Rezept aufgerufen, zeigt das System die Meldung "Rezept nicht gefunden". | UR-08 | Must |
-| FR-15 | Mehrere Nutzer können **gleichzeitig** mit demselben gemeinsamen Rezeptbestand arbeiten. Es gibt **keine Benutzerkonten und keine Anmeldung**. | UR-06 | Must |
+| FR-13 | Antwortet der Kalender-Dienst **nicht innerhalb von 2 Sekunden**, liefert er einen Fehler oder eine **ungültige Antwort**, wird die Suche **ohne Saison-Bevorzugung** (Sortierung nach FR-08 ohne Punkt 2) fortgesetzt. Das System zeigt einen **sichtbaren Hinweis** ("Saisonale Sortierung ist gerade nicht verfügbar"). Es gibt **keinen Abbruch und keine Fehlerseite**, und es wird **nichts doppelt gespeichert**. | UR-04, UR-09 | Must |
+| FR-14 | Das System **prüft alle Eingaben** (Pflichtfelder, Längen, Wertebereiche aus FR-01 und FR-02) und lehnt ungültige Eingaben mit einer **verständlichen Meldung** ab. Der Datenbestand bleibt dabei unverändert. Wird ein nicht vorhandenes Rezept aufgerufen, zeigt das System die Meldung "Rezept nicht gefunden". | UR-09 | Must |
+| FR-15 | Mehrere Nutzer können **gleichzeitig** mit demselben gemeinsamen Rezeptbestand arbeiten. Es gibt **keine Benutzerkonten und keine Anmeldung**. | UR-07 | Must |
 
 ### 3.2 Nicht-funktionale Anforderungen
 
