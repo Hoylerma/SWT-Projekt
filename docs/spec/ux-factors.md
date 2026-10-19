@@ -21,4 +21,4 @@
 ### 5. Interaktionseffizienz
 - **Definition:** Je weniger Schritte und weniger Zeit ein Nutzer fürs Erreichen seines Ziels braucht, desto effizienter ist die Interaktion gestaltet.
 - **Relevanz:** Die App wird nebenbei in der Küche benutzt, oft mit einer Hand am Handy. Wer lange suchen muss oder viel tippen muss, kocht lieber ohne App.
-- **Beispiel:** Von der Startseite bis zum geöffneten Rezept mit Zutatenliste in höchstens 3 Interaktionen. Die Zutatensuche per Teiltext muss dafür schnell filtern.
+- **Beispiel:** Von der Startseite bis zum geöffneten Rezept mit Zutatenliste in höchstens 3 Interaktionen. Die Zutatensuche per Teiltext muss dafür schnell filtern (= Autofill durch Anfang eines Wortes).
