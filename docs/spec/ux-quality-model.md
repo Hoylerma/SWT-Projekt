@@ -28,4 +28,4 @@
 - **Verifikation:** Beobachtungsprotokoll
 - **Bezug Lab 2:** NFR-03, quality.md 3.3
 
-Mit Ki "Bezug lab 2" rausgesucht
+Mit Ki "Bezug lab 2" rausgesucht, Claude Sonnet 5.5
