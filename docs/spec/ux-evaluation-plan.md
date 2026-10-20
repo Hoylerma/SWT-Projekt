@@ -68,7 +68,6 @@ Gemessen pro Prüfenden und Aufgabe. Die Schwellen entsprechen den Kriterien in 
 
 | ID | Journey / Schritt | Beschreibung des Problems | Heuristik / Faktor | Schweregrad (0–4) | Nachweis | Empfehlung |
 |---|---|---|---|---|---|---|
-| F-01 | | | | | Screenshot, Zeit, Zitat | |
 
 Schweregrad nach Nielsen (Häufigkeit, Auswirkung, Persistenz):
 
