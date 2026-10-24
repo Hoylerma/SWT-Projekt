@@ -19,7 +19,7 @@ Ein Rezept hat **eine bis viele** Zutatenzeilen (1 zu n). Jede Zutatenzeile geh√
 
 ```mermaid
 erDiagram
-    REZEPT ||--|{ ZUTATENZEILE : "enthaelt"
+    REZEPT ||--|{ ZUTATENZEILE : "enth√§lt"
     REZEPT {
         int id PK
         string name
