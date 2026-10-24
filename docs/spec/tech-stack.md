@@ -1,10 +1,11 @@
 **FRONTEND**
 
-Web-App 
+Web-App, Vite, React
 
 **BACKEND**
 
-python FastAPI
+python FastAPI, SQLAlchemy
+PostgreSQL, Docker Compose und pytest
 
 Jeder hat Erfahrung damit, ist auch sehr gut skalierbar und erweiterbar
 
@@ -23,5 +24,5 @@ pytest
 
 **Mocking Dependencies**
 
-Wir mocken unsere Kalender API mit kontollierten fake responses. 
+Wir mocken unsere Kalender-Dienst mit kontollierten fake responses. 
 
