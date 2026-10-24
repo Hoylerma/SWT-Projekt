@@ -38,35 +38,9 @@ erDiagram
     }
 ```
 
-## 4 Felder und Validierung
 
-### Rezept
 
-| Feld | Typ | Pflicht | Regel (aus FR-01) |
-|---|---|---|---|
-| `id` | Ganzzahl | automatisch | Primärschlüssel |
-| `name` | Text | ja | 1 bis 100 Zeichen, Leerraum am Rand wird entfernt |
-| `portionen` | Ganzzahl | ja | ganze Zahl von 1 bis 20 |
-| `beschreibung` | Text | nein | höchstens 2000 Zeichen, leer wird zu "nicht gesetzt" |
-| `schritte` | Text | nein | höchstens 5000 Zeichen, leer wird zu "nicht gesetzt" |
-| `saison` | Aufzählung | ja | Frühling, Sommer, Herbst, Winter oder ganzjährig, Standard ganzjährig |
-
-### Zutatenzeile
-
-| Feld | Typ | Pflicht | Regel (aus FR-02) |
-|---|---|---|---|
-| `id` | Ganzzahl | automatisch | Primärschlüssel |
-| `rezept_id` | Ganzzahl | ja | Fremdschlüssel auf `rezepte.id`, beim Löschen des Rezepts mitgelöscht |
-| `name` | Text | ja | 1 bis 60 Zeichen |
-| `name_key` | Text | automatisch | Name in Kleinschreibung, Grundlage der Eindeutigkeit |
-| `menge` | Dezimalzahl | ja | größer 0 und höchstens 99999 |
-| `einheit` | Aufzählung | ja | g, kg, ml, l, Stück, EL, TL |
-
-**Eindeutigkeit:** Ein Zutatenname darf in einem Rezept nur einmal vorkommen, ohne Unterscheidung von Groß- und Kleinschreibung. Das sichern **zwei Ebenen**: die Methode `Rezept.add_zutat` (verständliche Fehlermeldung) und ein Eindeutigkeits-Constraint `(rezept_id, name_key)` in der Datenbank als letzte Absicherung.
-
-**Fehlermeldungen:** Jede Validierung wirft einen `ValueError`, dessen Text das betroffene Feld nennt (z. B. "Portionen: ganze Zahl von 1 bis 20 erwartet"). Die spätere API setzt das in HTTP 422 um (FR-14).
-
-## 5 Persistenz-Mapping
+## 4 Persistenz-Mapping
 
 - **Relationale Persistenz** mit **PostgreSQL** (Entscheidung aus Lab 1, `docs/spec/tech-stack.md`), angesprochen über **SQLAlchemy 2** (objekt-relationales Mapping).
 - Aufzählungen (`saison`, `einheit`) werden als **Text** gespeichert (nicht als native Datenbank-Aufzählung), damit sie sich leicht ändern lassen.
@@ -74,7 +48,7 @@ erDiagram
 - Tabellen entstehen beim Start der Anwendung (`create_all`). Eine Migrationsverwaltung nutzen wir in diesem Stadium nicht.
 - Im **Testprofil** (`APP_ENV=test`) verwendet die Anwendung **SQLite im Arbeitsspeicher** statt PostgreSQL.
 
-## 6 Designentscheidungen
+## 5 Designentscheidungen
 
 1. **Validierung im Modell:** Die Regeln liegen direkt an den Entitäten, damit sie unabhängig von Oberfläche und Datenbank wirken und ohne Datenbank testbar sind.
 2. **Kind-Entität heißt Zutatenzeile:** Eine Zutat hat Menge und Einheit nur im Zusammenhang mit einem Rezept. Die Liste aller bekannten Zutatennamen für die Auswahl (FR-07) ergibt sich aus den Zutatenzeilen aller Rezepte, wir führen dafür keine eigene Tabelle.
