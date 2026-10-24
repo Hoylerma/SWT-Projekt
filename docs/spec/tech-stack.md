@@ -23,5 +23,5 @@ pytest
 
 **Mocking Dependencies**
 
-WIr mocken unsere Weather API mit kontollierten fake responses. 
+Wir mocken unsere Kalender API mit kontollierten fake responses. 
 
