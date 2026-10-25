@@ -1,3 +1,5 @@
+KI-Nutzung: Claude Sonnet 5.5 für schönere Visualisierung
+
 # Datenmodell: WG Cook
 
 Dieses Dokument beschreibt das Datenmodell, das wir in Lab 4 umgesetzt haben. Grundlage sind die Anforderungen in `docs/spec/requirements.md` (insbesondere FR-01 und FR-02) und unser Pitch in `docs/app.md`. Der Code liegt in `backend/app/models.py`.
