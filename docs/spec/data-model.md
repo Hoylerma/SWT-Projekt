@@ -9,7 +9,7 @@ Dieses Dokument beschreibt das Datenmodell, das wir in Lab 4 umgesetzt haben. Gr
 | Entität | Rolle | Tabelle | Beschreibung |
 |---|---|---|---|
 | **Rezept** | Primärentität | `rezepte` | Ein Rezept mit Name, Portionszahl, optionaler Beschreibung und Zubereitungsschritten und einer Saison-Zuordnung. |
-| **Zutat** | Kind-Entität | `zutat` | Eine Zutat eines Rezepts mit Menge und Einheit. |
+| **Zutatenzeile** | Kind-Entität | `zutat` | Eine Zutat eines Rezepts mit Menge und Einheit. |
 
 **Bewusst keine Entität:** Der **Kalender-Dienst** ist eine externe Abhängigkeit und kein Teil unserer Daten. Er liefert das Datum, aus dem das System die Saison ableitet. Die Saison **eines Rezepts** ist dagegen ein einfaches Feld (`saison`). Wir speichern keine Anfragen an den Dienst und kein Ergebnis als eigene Entität, weil dafür kein fachlicher Bedarf besteht (die Zwischenspeicherung aus FR-12 liegt im Arbeitsspeicher des Dienstes, nicht in der Datenbank).
 
@@ -21,7 +21,7 @@ Ein Rezept hat **eine bis viele** Zutaten (1 zu n). Jede Zutat gehört zu **gena
 
 ```mermaid
 erDiagram
-    REZEPT ||--|{ ZUTAT : "enthält"
+    REZEPT ||--|{ ZUTATENZEILE : "enthält"
     REZEPT {
         int id PK
         string name
@@ -30,7 +30,7 @@ erDiagram
         string schritte
         string saison
     }
-    ZUTAT {
+    ZUTATENZEILE {
         int id PK
         int rezept_id FK
         string name
@@ -53,6 +53,6 @@ erDiagram
 ## 5 Designentscheidungen
 
 1. **Validierung im Modell:** Die Regeln liegen direkt an den Entitäten, damit sie unabhängig von Oberfläche und Datenbank wirken und ohne Datenbank testbar sind.
-2. **Kind-Entität heißt Zutat:** Eine Zutat hat Menge und Einheit nur im Zusammenhang mit einem Rezept. Die Liste aller bekannten Zutatennamen für die Auswahl (FR-07) ergibt sich aus den Zutaten aller Rezepte, wir führen dafür keine eigene Tabelle.
+2. **Kind-Entität heißt Zutatenzeile:** Eine Zutat hat Menge und Einheit nur im Zusammenhang mit einem Rezept. Die Liste aller bekannten Zutatennamen für die Auswahl (FR-07) ergibt sich aus den Zutaten aller Rezepte, wir führen dafür keine eigene Tabelle.
 3. **`name_key` als gespeicherte Spalte:** So kann die Datenbank die Eindeutigkeit ohne Groß-/Kleinschreibung prüfen.
 4. **Keine Benutzerkonten:** Es gibt keine Entität für Nutzer (FR-15, NFR-07).
