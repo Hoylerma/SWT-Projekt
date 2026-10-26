@@ -17,7 +17,7 @@ Dieses Dokument beschreibt das Datenmodell, das wir in Lab 4 umgesetzt haben. Gr
 
 Ein Rezept hat **eine bis viele** Zutaten (1 zu n). Jede Zutat gehört zu **genau einem** Rezept. Beim Löschen eines Rezepts werden seine Zutaten mitgelöscht (Cascade). Die Regel "mindestens eine Zutat je Rezept" (FR-01, FR-05) prüft die Anwendung in der Geschäftslogik (`Rezept.erstelle`, `Rezept.remove_zutat`, `Rezept.validiere`), nicht die Datenbank.
 
-## 3 ER-Diagramm
+## 3 ER-Diagramm (+ Ausblick)
 
 ```mermaid
 erDiagram
