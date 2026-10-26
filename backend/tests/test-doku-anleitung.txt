@@ -1,6 +1,6 @@
 # Unit-Tests der Domänenmodelle (Lab 4, Aufgabe 4.3)
 
-Dieses Dokument beschreibt, welche Unit-Tests es für die Entitäten `Rezept` und `Zutatenzeile` gibt, was sie prüfen und wie man sie ausführt. Den Aufbau der Entitäten beschreibt [spec/data-model.md](spec/data-model.md), die Einrichtung [setup.md](setup.md).
+Dieses Dokument beschreibt die Unit-Tests für die Entitäten `Rezept` und `Zutatenzeile`, was sie prüfen und wie man sie ausführt. Den Aufbau der Entitäten beschreibt [spec/data-model.md](spec/data-model.md), die Einrichtung [setup.md](setup.md).
 
 > KI-Hinweis: Teile dieses Dokuments und der Tests wurden mit KI-Unterstützung (Claude) erstellt und vom Team geprüft.
 
@@ -10,14 +10,14 @@ Dieses Dokument beschreibt, welche Unit-Tests es für die Entitäten `Rezept` un
 |---|---|
 | Test-Framework | pytest (`backend/requirements-dev.txt`) |
 | Abhängigkeiten installieren | pip mit `requirements-dev.txt` |
-| Konfiguration | `backend/pytest.ini` (Testordner `tests`, Suchpfad `.`) |
+| Konfiguration | `backend/pytest.ini` |
 | Testprofil | `APP_ENV=test`, wird in `tests/conftest.py` gesetzt |
 
-Python hat kein eigenes Build-Tool wie Maven oder Gradle. `pip` und `pytest` übernehmen diese Rolle: **ein Befehl, keine externen Dienste.**
+Python hat kein eigenes Build-Tool wie Maven oder Gradle. `pip` und `pytest` übernehmen diese Rolle: ein Befehl, keine externen Dienste.
 
 ## Tests ausführen
 
-Voraussetzung: Python 3.12 oder neuer. Eine Datenbank, Docker oder den Kalender-Dienst braucht man **nicht**.
+Voraussetzung: Python 3.12 oder neuer. Eine Datenbank oder Docker braucht man nicht.
 
 ```bash
 cd backend
@@ -28,78 +28,48 @@ pip install -r requirements-dev.txt
 
 pytest tests/unit          # nur die Unit-Tests dieser Aufgabe
 pytest tests/unit -v       # jeder Test einzeln mit Namen
-pytest                     # zusätzlich die Smoke-Tests (Aufgabe 4.1)
+pytest                     # zusätzlich der Smoke-Test (Aufgabe 4.1)
 ```
 
-Einzelne Tests auswählen:
-
-```bash
-pytest tests/unit/test_rezept.py        # eine Datei
-pytest -k "menge"                       # alle Tests, deren Name "menge" enthält
-```
-
-Ohne eigene Python-Installation, nur mit Docker:
+Mit Docker, ohne eigene Python-Installation:
 
 ```bash
 docker run --rm -v "$(pwd):/app" -w /app python:3.12-slim \
   sh -c "pip install -q -r requirements-dev.txt && pytest tests/unit -v"
 ```
 
-**Erwartetes Ergebnis:** alle Tests grün (`passed`), keine Fehler. Eine Warnung von Starlette zu `httpx` stammt aus den Smoke-Tests und ist harmlos.
+**Erwartetes Ergebnis:** `17 passed` für die Unit-Tests, `18 passed` mit dem Smoke-Test. Eine Warnung von Starlette zu `httpx` stammt vom Smoke-Test und ist harmlos.
 
 ## Abgrenzung
 
-Die Unit-Tests laufen **ohne Datenbank** und **ohne Aufruf der externen Abhängigkeit** (Kalender-Dienst). Sie erzeugen die Entitäten nur im Speicher und öffnen nie eine Datenbank-Session. Tests mit Datenbank liegen getrennt unter `tests/smoke/`.
+Die Unit-Tests laufen ohne Datenbank und ohne Aufruf der externen Abhängigkeit (Kalender-Dienst). Sie erzeugen die Entitäten nur im Speicher. Der Smoke-Test liegt getrennt unter `tests/smoke/`.
 
 ## Aufbau
 
-Pro Entität gibt es eine Testdatei, dazu eine für die Beziehung.
-
-| Datei | Gegenstand |
-|---|---|
-| `tests/unit/test_rezept.py` | Entität `Rezept` |
-| `tests/unit/test_zutatenzeile.py` | Entität `Zutatenzeile` |
-| `tests/unit/test_beziehung_rezept_zutat.py` | Beziehung 1:n und Hilfsmethoden von `Rezept` |
+| Datei | Gegenstand | Tests |
+|---|---|---|
+| `tests/unit/test_rezept.py` | Entität `Rezept` | 6 |
+| `tests/unit/test_zutatenzeile.py` | Entität `Zutatenzeile` | 8 |
+| `tests/unit/test_beziehung_rezept_zutat.py` | Beziehung 1:n | 3 |
 
 ## Was geprüft wird
 
 Die vier Prüfungen aus der Aufgabe sind so abgedeckt:
 
-### 1. Gültige Erzeugung liefert die gesetzten Werte
-- `Rezept`: Pflichtfelder, alle Felder, Standard-Saison "ganzjährig", Entfernen von Leerraum beim Namen.
-- `Zutatenzeile`: Name, Menge, Einheit, Schlüssel in Kleinschreibung, exakte Dezimalmenge.
+1. **Gültige Erzeugung liefert die gesetzten Werte.** Ein Rezept mit Name und Portionen und eine Zutatenzeile mit Name, Menge und Einheit haben nach dem Anlegen genau diese Werte.
+2. **Fehlende Pflichtfelder werden abgelehnt.** Fehlt ein Pflichtfeld, wirft die Entität einen `ValueError`.
 
-### 2. Fehlende oder ungültige Pflichtfelder werden abgelehnt
-Die Grenzen stammen aus FR-01 und FR-02 in `docs/spec/requirements.md`. Geprüft wird je ein Wert **auf** der Grenze (gültig) und knapp **darüber oder darunter** (ungültig).
+   | Entität | Pflichtfeld | Abgelehnt |
+   |---|---|---|
+   | Rezept | name | `None`, leer, nur Leerzeichen |
+   | Rezept | portionen | `None` |
+   | Zutatenzeile | name | `None`, leer, nur Leerzeichen |
+   | Zutatenzeile | menge | `None` |
+   | Zutatenzeile | einheit | `None`, leer, nur Leerzeichen |
 
-| Feld | Gültig | Abgelehnt |
-|---|---|---|
-| Rezept-Name | 1 bis 100 Zeichen | leer, nur Leerzeichen, `None`, 101 Zeichen, kein Text |
-| Portionen | ganze Zahl 1 bis 20 | 0, -1, 21, 2.5, `"3"`, `None`, `True` |
-| Beschreibung / Schritte | bis 2000 / 5000 Zeichen | länger |
-| Saison | Frühling, Sommer, Herbst, Winter, ganzjährig | alles andere |
-| Zutatenname | 1 bis 60 Zeichen | leer, `None`, 61 Zeichen |
-| Menge | über 0 bis 99999 | 0, negativ, über 99999, `None`, NaN, unendlich |
-| Einheit | g, kg, ml, l, Stück, EL, TL | unbekannte Einheit, leer, `None` |
+3. **Beziehung.** Eine hinzugefügte Zutatenzeile ist über `rezept.zutaten` abrufbar, und `zeile.rezept` zeigt auf das Rezept zurück. Setzt man `zeile.rezept` von Hand, erscheint die Zeile ebenfalls in der Liste des Rezepts.
+4. **Hilfsmethode.** `Rezept.add_zutat` hat einen eigenen Test: Sie hängt die Zeile an das Rezept an und gibt sie zurück.
 
-Jede Fehlermeldung ist ein `ValueError`, der das betroffene Feld nennt.
+## Bei Änderungen
 
-### 3. Beziehung zwischen Rezept und Zutatenzeile
-- Eine hinzugefügte Zutat ist über `rezept.zutaten` abrufbar, und `zeile.rezept` zeigt zurück.
-- Die Reihenfolge der Zutaten bleibt erhalten.
-- Zutaten zweier Rezepte sind getrennt.
-- Eine entfernte Zutat zeigt nicht mehr auf das Rezept.
-
-### 4. Hilfsmethoden haben eigene Tests
-
-| Methode | Geprüft |
-|---|---|
-| `Rezept.erstelle` | legt Rezept mit allen Zutaten an, lehnt leere Zutatenliste und doppelte Zutat ab |
-| `Rezept.add_zutat` | gibt die Zeile zurück, lehnt Duplikate ab (auch bei anderer Groß-/Kleinschreibung), ein Fehler ändert das Rezept nicht |
-| `Rezept.remove_zutat` | entfernt eine Zutat, lehnt die letzte und unbekannte Zutaten ab |
-| `Rezept.zutat_schluessel` | Namen in Kleinschreibung, leeres Rezept liefert leere Menge |
-| `Rezept.validiere` | lehnt Rezept ohne Zutaten und mit doppelter Zutat ab, akzeptiert vollständige Rezepte |
-
-## Bei Änderungen an den Regeln
-
-Die Grenzwerte stehen in `backend/app/models.py` (Konstanten wie `PORTIONEN_MAX`). Die Tests verwenden diese Konstanten für die Grenzen. Ändert sich eine Regel in `requirements.md`, passt man die Konstante und die ungültigen Beispielwerte in den Tests an.
+Neue Regeln für die Entitäten gehören in `backend/app/models.py`, dazu jeweils ein Test in der passenden Datei unter `tests/unit/`.
