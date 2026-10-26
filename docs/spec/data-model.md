@@ -9,7 +9,7 @@ Dieses Dokument beschreibt das Datenmodell, das wir in Lab 4 umgesetzt haben. Gr
 | Entität | Rolle | Tabelle | Beschreibung |
 |---|---|---|---|
 | **Rezept** | Primärentität | `rezepte` | Ein Rezept mit Name, Portionszahl, optionaler Beschreibung und Zubereitungsschritten und einer Saison-Zuordnung. |
-| **Zutatenzeile** | Kind-Entität | `zutat` | Eine Zutat eines Rezepts mit Menge und Einheit. |
+| **Zutatenzeile** | Kind-Entität | `zutatenzeile` | Eine Zutat eines Rezepts mit Menge und Einheit. |
 
 **Bewusst keine Entität:** Der **Kalender-Dienst** ist eine externe Abhängigkeit und kein Teil unserer Daten. Er liefert das Datum, aus dem das System die Saison ableitet. Die Saison **eines Rezepts** ist dagegen ein einfaches Feld (`saison`). Wir speichern keine Anfragen an den Dienst und kein Ergebnis als eigene Entität, weil dafür kein fachlicher Bedarf besteht (die Zwischenspeicherung aus FR-12 liegt im Arbeitsspeicher des Dienstes, nicht in der Datenbank).
 
