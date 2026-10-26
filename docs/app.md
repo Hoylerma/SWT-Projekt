@@ -19,7 +19,7 @@ Die Anwendung soll die Zutaten kombinieren und geeignete Rezepte vorschlagen
 **ENTITIES**
 
 Primary: Rezept
-Child: Zutat
+Child: Zutatenzeile
 
 **External Dependencies** 
 
