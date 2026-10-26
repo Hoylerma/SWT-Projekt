@@ -25,7 +25,7 @@ Danach läuft das Backend auf `http://localhost:8000`, die Datenbank auf Port 54
 
 ```bash
 curl http://localhost:8000/api/v1/health
-# {"status":"ok","umgebung":"dev"}
+# {"status":"ok"}
 ```
 
 ## Backend-Tests ausführen (ohne Docker)
@@ -39,7 +39,7 @@ pip install -r requirements-dev.txt
 
 pytest                # alle Tests
 pytest tests/unit     # nur die Unit-Tests der Entitäten (ohne Datenbank)
-pytest tests/smoke    # nur die Smoke-Tests (Start der Anwendung, Mapping im Testprofil)
+pytest tests/smoke    # nur die Smoke-Tests (health check)
 ```
 
 Die Tests brauchen weder die PostgreSQL-Datenbank noch den Kalender-Dienst.
@@ -61,7 +61,7 @@ Das Frontend ist in Lab 4 nur ein Skelett mit Routing: Startseite (`/`), Rezepte
 backend/
   app/            Anwendung (config, database, models, main)
   tests/unit/     Unit-Tests der Entitäten, ohne Datenbank
-  tests/smoke/    Smoke-Tests (Anwendungsstart, Persistenz im Testprofil)
+  tests/smoke/    Smoke-Tests (health check)
 frontend/         Web-Oberfläche (Vite, React, React Router)
 docs/             Dokumentation (spec/ mit Anforderungen, Datenmodell usw.)
 docker-compose.yml
