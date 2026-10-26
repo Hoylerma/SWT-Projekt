@@ -67,26 +67,26 @@ KI Anwendung: Claude Sonnet 5.5, gesammelte Notizen ausformuliert, visuell ferti
 
 ### 4.1 Primärentität Rezept und Kind-Entität Zutat
 
-- **Rezept anlegen:** Der Nutzer gibt Rezeptdaten und mindestens eine Zutatenzeile ein, das System prüft (FR-13) und speichert Rezept und Zutatenzeilen gemeinsam. Bei einem Fehler wird nichts gespeichert.
+- **Rezept anlegen:** Der Nutzer gibt Rezeptdaten und mindestens eine Zutatenzeile ein, das System prüft (FR-14) und speichert Rezept und Zutatenzeilen gemeinsam. Bei einem Fehler wird nichts gespeichert.
 - **Rezept ansehen:** Das System lädt das Rezept mit allen Zutatenzeilen und zeigt sie an (FR-03).
 - **Rezept ändern:** Der Nutzer ändert Rezeptdaten oder fügt Zutatenzeilen hinzu oder entfernt sie (FR-04). Das Rezept behält mindestens eine Zutatenzeile.
 - **Rezept löschen:** Das System löscht das Rezept und alle zugehörigen Zutatenzeilen (FR-05).
 
-Die Beziehung ist **1 zu n**: ein Rezept hat mehrere Zutatenzeilen, eine Zutatenzeile gehört zu genau einem Rezept. Die Abdeckung eines Rezepts (FR-07) ergibt sich aus seinen Zutatenzeilen.
+Die Beziehung ist **1 zu n**: ein Rezept hat mehrere Zutatenzeilen, eine Zutatenzeile gehört zu genau einem Rezept. Die Abdeckung eines Rezepts (FR-08) ergibt sich aus seinen Zutatenzeilen.
 
 ### 4.2 Rezeptfindung (Hauptablauf)
 
-1. Der Nutzer wählt die vorhandenen Zutaten aus (FR-06).
-2. Das System berechnet für jedes Rezept die Abdeckung (FR-07).
-3. Das System ermittelt die aktuelle Saison über den Kalender-Dienst (FR-10, FR-11).
-4. Das System sortiert die Treffer nach FR-08 und zeigt je Treffer abgedeckte und fehlende Zutaten (FR-09).
+1. Der Nutzer wählt die vorhandenen Zutaten aus (FR-07).
+2. Das System berechnet für jedes Rezept die Abdeckung (FR-08).
+3. Das System ermittelt die aktuelle Saison über den Kalender-Dienst (FR-11, FR-12).
+4. Das System sortiert die Treffer nach FR-09 und zeigt je Treffer abgedeckte und fehlende Zutaten (FR-10).
 5. Der Nutzer öffnet ein Rezept und sieht alle Zutaten (FR-03).
 
 ### 4.3 Interaktion mit der externen Abhängigkeit (Kalender-Dienst)
 
-- **Wofür:** Der Dienst liefert das aktuelle Datum, aus dem das System die Saison ableitet und saisonal passende Rezepte bevorzugt (FR-08, FR-10).
-- **Wann:** Bei einer Suche, wenn keine gültige zwischengespeicherte Saison vorliegt (FR-11).
-- **Fehlerfall:** Antwortet der Dienst nicht, fehlerhaft oder zu spät, läuft die Suche ohne Saison-Bevorzugung weiter und der Nutzer sieht einen Hinweis (FR-12, NFR-02).
+- **Wofür:** Der Dienst liefert das aktuelle Datum, aus dem das System die Saison ableitet und saisonal passende Rezepte bevorzugt (FR-09, FR-11).
+- **Wann:** Bei einer Suche, wenn keine gültige zwischengespeicherte Saison vorliegt (FR-12).
+- **Fehlerfall:** Antwortet der Dienst nicht, fehlerhaft oder zu spät, läuft die Suche ohne Saison-Bevorzugung weiter und der Nutzer sieht einen Hinweis (FR-13, NFR-02).
 - **Warum der Dienst nicht in jedem automatisierten Test live aufgerufen werden soll:** Sein Ergebnis hängt vom Datum ab und ist damit **nicht deterministisch**, er braucht eine **Netzwerkverbindung**, und ein einziger Aufruf genügt, weil sich die Saison nur viermal im Jahr ändert. In automatisierten Tests wird er deshalb durch eine Ersatzimplementierung mit **kontrollierten Antworten** ersetzt (auch für Fehlerfälle). Das ist durch die Kapselung in NFR-06 möglich.
 
 
