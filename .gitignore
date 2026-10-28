@@ -1,1 +1,18 @@
+# Node / Frontend
+node_modules/
+frontend/dist/
+*.log
 
+# Python / Backend
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+#lokale Konfiguration
+.env
+.env.*
+!.env.example
