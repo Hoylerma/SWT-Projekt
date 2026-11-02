@@ -59,3 +59,14 @@ Der Kreis ist der Akteur, ein Oval ist ein Use Case, gestrichelte Pfeile sind Be
 | **Nachbedingung** | Die aktuelle Saison ist bekannt (und zwischengespeichert) **oder** "unbekannt" an UC-01 gemeldet, der Rezeptbestand ist unverändert. |
 | **Bezug** | FR-10, FR-11, FR-12 |
 
+## 6 UC-03: Rezept mit Zutaten anlegen
+
+| Feld | Beschreibung |
+|---|---|
+| **Name / ID** | UC-03 Rezept mit Zutaten anlegen |
+| **Akteur(e)** | WG-Mitglied |
+| **Vorbedingung** | Das System ist erreichbar. |
+| **Hauptablauf** | 1. Das WG-Mitglied öffnet die Rezept-erstellung. 2. Das WG-Mitglied füllt mindestens alle Pflicht-Felder aus, darunter Name, Beschreibung, Portionszahl, Saison, optionale Zubereitungsschritte und alle Zutaten mit Menge und Einheit. 3. Das System prüft die Auswahl. 4. Das System speichert den Eintrag in der Datenbank ab und lädt das Rezept mit allen Zutatenzeilen. |
+| **Alternativen / Ausnahmen** | **4a. Eingabe ist unvollständig**, z. B. weil ein Feld nicht ausgefüllt wurde: Das System zeigt die Meldung "<Feld> bitte ausfüllen". **4b. Eingabe ist falsch**, weil die Einagbe in einem Feld nicht der richtigen Form entspricht: Das System zeigt die Meldung "nicht korrekte Eingabe, M"oglichkeiten xyz". |
+| **Nachbedingung** | **Erfolg:** Rezept und Zutaten sind angezeigt, der Bestand ist um 1 gestiegen. **Bei nicht korrekter Eingabe:** Meldung angezeigt, nichts verändert. |
+| **Bezug** | FR-01 |
