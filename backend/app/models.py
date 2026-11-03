@@ -19,6 +19,7 @@ class Rezept(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100))
     portionen: Mapped[int]
+    saison: Mapped[str] = mapped_column(String(20), default="ganzjährig")
     zutaten: Mapped[list["Zutatenzeile"]] = relationship(
         back_populates="rezept", cascade="all, delete-orphan"
     )
