@@ -8,11 +8,28 @@ WG Cook ist eine Web-App für Wohngemeinschaften: Rezepte mit Zutaten verwalten 
 - Frontend-Skelett (Vite, React, React Router) mit den Seiten Start, Rezepte und Not Found
 - Docker Compose für Backend und Datenbank
 
+## Labor 5 
+
+- BDD-Akzeptanztests mit behave: Gherkin-Szenarien in `backend/tests/features/`, Step-Definitionen in `backend/tests/features/steps/`
+- Handgeschriebener Kalender-Stub und In-Memory-Repository in `backend/tests/stubs/`
+- `backend/run_tests.py` führt Unit-, Smoke- und BDD-Tests mit einem Befehl aus
+
+## Tests
+
+```bash
+cd backend
+pip install -r requirements-dev.txt
+python run_tests.py     # komplette Suite
+pytest                  # nur Unit- und Smoke-Tests
+behave tests/features   # nur BDD-Tests
+```
+
+
 ## Schnellstart
 
 ```bash
 docker compose up --build        # Backend (Port 8000) und PostgreSQL
-cd backend && pytest             # Tests, brauchen keine Datenbank
+cd backend && python run_tests.py # Tests, brauchen keine Datenbank
 cd frontend && npm install && npm run dev   # Frontend auf Port 5173
 ```
 

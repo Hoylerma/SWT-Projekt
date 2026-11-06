@@ -9,6 +9,7 @@ from tests.stubs.kalender_dienst_stub import KalenderDienstStub
 def before_scenario(context, scenario):
     context.repository = InMemoryRezeptRepository()
     context.kalender = KalenderDienstStub()
+    context.kalender.liefere_datum("2026-07-15") 
     context.service = RezeptService(context.repository, context.kalender)
     context.eingabe = None
     context.rezept = None     
