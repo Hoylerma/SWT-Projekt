@@ -37,9 +37,12 @@ python -m venv .venv
 # Linux/Mac: source .venv/bin/activate
 pip install -r requirements-dev.txt
 
-pytest                # alle Tests
+python run_tests.py   # komplette Suite: Unit-, Smoke- und BDD-Tests
+
+pytest                # Unit- und Smoke-Tests (Lab 4)
 pytest tests/unit     # nur die Unit-Tests der Entitäten (ohne Datenbank)
 pytest tests/smoke    # nur die Smoke-Tests (health check)
+behave tests/features # nur die BDD-Akzeptanztests (Lab 5)
 ```
 
 Die Tests brauchen weder die PostgreSQL-Datenbank noch den Kalender-Dienst.
