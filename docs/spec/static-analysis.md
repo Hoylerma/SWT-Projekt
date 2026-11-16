@@ -3,6 +3,6 @@
 | Category | Tool | Reason |
 |---|---|---|
 | **Linter** | Pylint | Errors and style across the whole backend: unused arguments, common sources of bugs, formatting issues, naming. Also gives the code a score from 0 to 10 |
-| **Complexity** | Radon | Cyclomatic complexity (McCabe) and Maintainability Index |
+| **Stil format checker** | ruff format | formation of code space/tab, quotation marks, ... |
 
 we took those examples from the Lab 6 exercise
