@@ -69,3 +69,12 @@ frontend/         Web-Oberfläche (Vite, React, React Router)
 docs/             Dokumentation (spec/ mit Anforderungen, Datenmodell usw.)
 docker-compose.yml
 ```
+
+## Statische Tests Lab 6
+
+```bash
+cd backend
+pylint app tests run_tests.py   # Linter, Exit-Code ungleich 0 bei Befunden
+ruff format --check .           # Formatierung prüfen, Exit-Code 1 wenn etwas abweicht
+ruff format .                   # Code automatisch formatieren
+```
