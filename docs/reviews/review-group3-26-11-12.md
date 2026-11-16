@@ -2,7 +2,7 @@
 
 **Project / product:** FocusFlow by group 3  
 **Review object(s):** app.md, requirements.md, quality.md, backend?  
-**Review type:** informal technical review  
+**Review type:** walkthrough  
 **Date (planned / actual):** 12.November 2026  
 **Moderator:** Max
 **Protokollant:** Isabel  
@@ -16,8 +16,7 @@
 Use this template together with the review process you selected from the presented ones in the course. The phases below describe a typical inspection-style workflow (adapt terminology to your chosen review type if needed).
 
 | type | reason|
-| technical review | we intend to review the technical soundness and overall consensus of the project(see review objects), but due to the time limit and the fact we only want to do a static review with no tests, the techncial review is more informal with also no author present |
-walkthrough | we intend to review some of the technical soundness and overall consensus of the project(see review objects), but due to the time limit and the fact we only want to do a static review with no tests, the review is a author present
+| walkthrough | we intend to review some of the technical soundness and overall consensus of the project (see review objects), but due to the time limit and the fact we only want to do a static review with no tests a walkthrough seemed the most appropriate, it also seemed more time-efficient to have the project also explained by an author present |
 
 **Terminology**
 
@@ -34,6 +33,8 @@ walkthrough | we intend to review some of the technical soundness and overall co
 |-------|-------------|
 | **Planning** | The moderator checks whether the **entry criteria** are met (e.g. the review object is in a reviewable state). The review is planned: reviewers and dates are fixed, invitations are sent, etc. The moderator completes the **Master Plan (MP)** and identifies suitable inspection tasks. |
 | **Individual preparation** | Each reviewer examines the review object for defects and other issues. Findings and their quality are reported to the moderator. The moderator consolidates findings into one document, prepares the review meeting, and derives key figures for the **Data Summary (DS)**. |
+| **Walkthrough Meeting** | The author of the project meets with the reviewers and walks them through the project, the files, setup, etc. The reviewers present their initial findings and document further findings that appear through the walkthrough. |
+| **Final Documentation** | The reviewers finalize their findings and documentation. |
 
 
 ---
@@ -59,12 +60,12 @@ walkthrough | we intend to review some of the technical soundness and overall co
 
 | # | Review objects | Abbr. |
 |---|----------------|-------|
-| 1 | project description app.md | app |
-| 2 | requirements.md | reqs |
-| 3 | quality.md | quali |
-| 4 | unit tests | unit-test |
-| 5 | gherkin feature files| gherkin |
-| 6 | irgendwa sim backend | backend |
+| 1 | project description app.md | APP |
+| 2 | requirements.md | REQ |
+| 3 | quality.md | QUA |
+| 4 | unit tests | UNI |
+| 5 | gherkin feature files| GHE |
+| 6 | irgendwa sim backend | BAC |
 
 ### 2.3 Reference documents
 
@@ -72,8 +73,8 @@ walkthrough | we intend to review some of the technical soundness and overall co
 
 | # | Reference documents | Abbr. |
 |---|---------------------|-------|
-| 1 | focus flow product brief | brief |
-| 2 | focus flow product description | desc |
+| 1 | focus flow product brief | BRI |
+| 2 | focus flow product description | DES |
 
 ### 2.4 Checklists / scenarios
 
@@ -91,7 +92,7 @@ walkthrough | we intend to review some of the technical soundness and overall co
 | Reviewer | Names (and chapters / checklists or scenarios assigned to the review) | Abbr. |
 |:--------:|---------------------------------------------------------------------------|-------|
 | 1 | Max, app.md | MA |
-| 2 | Isabel, requirements.md, quality.md | IRQ |
+| 2 | Isabel, requirements.md, quality.md | IS |
 | 3 | Fabian | <!--  --> |
 | 4 | Manuel | <!--  --> |
 | 5 | Sefa | <!--  --> |
@@ -111,10 +112,10 @@ walkthrough | we intend to review some of the technical soundness and overall co
 
 | Individual preparation | Value | Unit |
 |------------------------|-------|------|
-| Submission of findings by | <!-- Enter the deadline by which each reviewer submits findings to the moderator (date/time or rule such as “72h after kick-off”). --> | — |
-| Size of review objects | <!-- Enter the total Non-Comment Lines of Code (NLOC) for code; for specification-only reviews, use pages or words and note the unit here. --> | NLOC |
-| Optimal inspection rate | <!-- Target or measured inspection speed (e.g. NLOC per hour per reviewer). --> | NLOC/h |
-| Optimal inspection time | <!-- Planned total inspection time in hours (placeholder 0.00 until estimated or measured). --> | h |
+| Submission of findings by | 48h before deadline | — |
+| Size of review objects | 14446 | NLOC |
+| Optimal inspection rate | ~500 | NLOC/h |
+| Optimal inspection time | 6 | h |
 
 ### 2.8 Review meeting
 
@@ -168,12 +169,13 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 ### 5.1 Summary
 
 <!-- Short executive summary: object reviewed, outcome, overall quality impression. -->
+The reviewed project is an application for managing tasks. The outcome contained some minor erros and mistakes that could overall be easily fixed and only provide minor disturbances. The impression of the quality left on the reviewers was altogether good. No major deficiences were detected, the author seemed to know their project and what they want to achieve with it.
 
 
 ### 5.2 Review outcome
 
-- **Review object state after review:** <!-- e.g. accepted with changes, requires re-inspection, not accepted -->
-- **Major risks or themes:** <!-- bullet list -->
+- **Review object state after review:** unchanged<!-- e.g. accepted with changes, requires re-inspection, not accepted -->
+- **Major risks or themes:** none<!-- bullet list -->
 
 ### 5.3 Decisions and follow-up
 
@@ -200,22 +202,3 @@ struktur von den aufgaben wurd egut eingehalten
 ---
 
 <!-- End of template -->
-
-## Lab 6.2 Retrospektive zum Review
-Was hat gut funktioniert? 
-Kommunikation mit gruppe 3
-sehr gut verständlicher walkthrough
-
-Was war schwierig?
-nciht wirklich schwierig, aber sachen von vor mehreen wochen sich ohne nachschuaen zu erinnern, man musste halt nochmal in den labs nachlesen oder nachfragen
-es war uns nicht immer ganz eindeutig wann welcher type und severity genau zutrifft, vorallem wenn es so grenzfälle waren
-
-Sind formale Reviews eine geeignete Methode für Ihr Team? Für welche Artefakte (Spezifikation, Design, Code) würden Sie sie erneut einsetzen?
-für die größe unseres projektes wirkt ein vollumfängliches review ein wenig zu viel. aber vor allem für code implememtation ist eine formal wreview ausserhalb vom team ganz hilfreich auch um unstimmigkeiten zwischen verschiednene dokumenten zu finden, die einem selber nichtmehr auffallen
-
-Eine konkrete Verbesserung, die Sie für die nächste Review-Runde vornehmen würden.
-bessere vorbereitungsphase vollziehen
-
-
-Textversion:
-Die Zusammenarbeit mit Gruppe 3 lief sehr gut. Ihr Walkthrough war gut verständlich, so konnten wir uns schnell in ihr Projekt einarbeiten und Rückfragen direkt klären. Richtig schwierig war das Review nicht. Allerdings war es nicht leicht, sich ohne Nachschauen an Inhalte von vor mehreren Wochen zu erinnern, deshalb mussten wir öfter in den früheren Labs nachlesen oder nachfragen. Außerdem war nicht immer eindeutig, welcher Typ und welcher Schweregrad zu einem Befund passt, vor allem bei Grenzfällen. Für die Größe unseres Projekts wirkt ein vollständiges formales Review etwas zu aufwendig. Für die Implementierung halten wir ein formales Review durch Personen außerhalb des Teams aber für hilfreich. Dabei fallen auch Unstimmigkeiten zwischen verschiedenen Dokumenten auf, die man im eigenen Projekt nicht mehr bemerkt. Für Code würden wir es deshalb wieder einsetzen. In der nächsten Runde würden wir die Vorbereitungsphase gründlicher gestalten: die früheren Labs vorher noch einmal lesen und gemeinsam festlegen, wann welcher Typ und welcher Schweregrad gilt.
