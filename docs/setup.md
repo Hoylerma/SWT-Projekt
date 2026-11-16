@@ -59,6 +59,8 @@ ruff format .                   # formatiert alle Dateien automatisch
 pylint app tests run_tests.py   # Linter mit Note 0–10 (ca. 30 s)
 ```
 
+Beide Befehle beenden sich mit einem Exit-Code ungleich 0, wenn sie etwas finden (Pylint bei Befunden, `ruff format --check` bei abweichender Formatierung). Darauf baut später die CI in Lab 9 auf.
+
 Erwarteter Stand: `20 files already formatted` und `Your code has been rated at 10.00/10`. Begründung, Ergebnisse und Bewertung: [spec/static-analysis.md](spec/static-analysis.md).
 
 ## Frontend starten
