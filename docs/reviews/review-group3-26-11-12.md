@@ -94,7 +94,7 @@ Use this template together with the review process you selected from the present
 | 1 | Max, app.md | MA |
 | 2 | Isabel, requirements.md, quality.md | IS |
 | 3 | Fabian | <!--  --> |
-| 4 | Manuel | <!--  --> |
+| 4 | Manuel, Gherkin feature files (GHE)| MH |
 | 5 | Sefa | <!--  --> |
 
 
@@ -144,10 +144,14 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 | F-007 | requirements.md & app.md  | Task-Zustände and checkTask define the same statuses with different labels | suggestion | minor | open | - | - |
 | F-008 | quality.md, section qualitätsmodell | it is only stated that a secure hash is intended to be used, but no defintion of what secure means or by which standards a hash will be chosen | question | minor | open | - | author stated that database isn't implemented yet |
 | F-008 | quality.md, section qualitätsmodell | unclear definition of the messbar cell of wartbarkeit | suggestion | minor | open | - | author agreed |
-| F-009 | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> |
-| F-010 | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> |
-| F-010 | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> |
-| F-010 | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> | <!-- --> |
+| F-09 | all `Gherkin-Szenarien/*.feature` | German keywords (Angenommen, Wenn, Dann) are used without a `# language: de` header; with the default English parser the step lines are read as scenario description, so the scenarios would contain no executable steps and the 7 "passed" BDD tests would verify nothing  | defect | major | open | - | - |
+| F-10 | Gherkin-Szenarien, use-cases.md | Several use cases have no scenarios: "Nutzer anmelden", "Aufgabe zuweisen" and most of "Eingaben prüfen"  | defect | major | open | - | - |
+| F-11 | Gherkin-Szenarien, quality.md "Zuverlässigkeit" / "Testbarkeit" | No scenario covers the external dependency (e-mail notifications / reminders) or its simulated outage| defect | major | open | - | - |
+| F-12 | Task_verschieben.feature, requirements.md, use-cases.md | Scenarios use the statuses "To Do" / "In Progress" / "Overdue", while requirements.md and use-cases.md use "Offen" / "In Arbeit" / "Fertig"; the transition to "Done" is not covered | defect | minor | open | - | - |
+| F-13 | all .feature files, StepDefinitions/*.cs | Scenarios describe UI behavior , but the step definitions only check the service / in-memory repository, so e.g. "auf dem Dashboard angezeigt" is never actually verified | defect | minor | open | - | - |
+| F-14 | Task_verschieben.feature, Task_erstellen.feature, Kommentar_ergänzen.feature | Given steps are narrative instead of preconditions "Brille nicht an", "Aufgabe falsch verstanden" and contain asserts; test values (51 / 201 characters) are hidden in the step code instead of a Scenario Outline with Examples | suggestion | minor | open | - | - |
+| F-15 | all .feature files | Incomplete sentences "gültige Werte in das Formular eingetragen", "flasch", "kommplett", "aktuallisiert" | defect | editorial | open | - | - |
+
 
 ---
 
