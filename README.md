@@ -24,6 +24,16 @@ pytest                  # nur Unit- und Smoke-Tests
 behave tests/features   # nur BDD-Tests
 ```
 
+## Labor 6: Statische Analyse
+
+Linter **Pylint** und Formatierer **ruff format**, beide über `requirements-dev.txt` installiert und in `backend/pyproject.toml` konfiguriert. Begründung und Bewertung: [docs/spec/static-analysis.md](docs/spec/static-analysis.md).
+
+```bash
+cd backend
+ruff format --check .           # Formatierung prüfen (ruff format . behebt alles)
+pylint app tests run_tests.py   # Linter, Note 0–10
+```
+
 
 ## Schnellstart
 

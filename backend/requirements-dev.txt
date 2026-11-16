@@ -3,3 +3,6 @@ pytest>=8
 httpx>=0.27
 pytest-bdd>=8
 behave>=1.2
+# Lab 6.3: statische Analyse
+pylint>=4.1
+ruff>=0.17

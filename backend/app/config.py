@@ -1,4 +1,5 @@
 """Konfiguration: Profil dev = PostgreSQL, Profil test = SQLite im Speicher."""
+
 import os
 
 DEV_URL = "postgresql+psycopg://wgcook:wgcook@localhost:5432/wgcook"

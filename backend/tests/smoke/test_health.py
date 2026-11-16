@@ -1,4 +1,5 @@
 """Smoke-Test: Die Anwendung startet im Testprofil und antwortet auf den Health-Endpunkt."""
+
 from fastapi.testclient import TestClient
 
 from app.main import app

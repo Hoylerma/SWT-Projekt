@@ -1,12 +1,20 @@
+# behave-Decorators (given/when/then) sind Objekte mit __call__; Pylint erkennt das
+# nicht und meldet faelschlich E1102 (Falsch-Positiv, siehe docs/spec/static-analysis.md)
+# pylint: disable=not-callable
 from behave import given, when, then
 from app.rezept_service import RezeptEingabe, RezeptNichtGefunden, ZutatEingabe
 
 
 @given("es sind Rezepte angelegt")
 def step_rezepte_angelegt(context):
-    rezept = context.service.rezept_anlegen(RezeptEingabe(
-        "Tomatensalat", 2, "Sommer",
-        [ZutatEingabe("Tomate", 400, "g"), ZutatEingabe("Olivenöl", 2, "EL")]))
+    rezept = context.service.rezept_anlegen(
+        RezeptEingabe(
+            "Tomatensalat",
+            2,
+            "Sommer",
+            [ZutatEingabe("Tomate", 400, "g"), ZutatEingabe("Olivenöl", 2, "EL")],
+        )
+    )
     context.rezept_id = rezept.id
 
 

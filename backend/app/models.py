@@ -1,4 +1,5 @@
 """Domänenmodell: Rezept (Primärentität) hat viele Zutatenzeilen (Kind-Entität)."""
+
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, validates
 

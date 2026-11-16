@@ -1,4 +1,5 @@
 """Handgeschriebenes Fake-Repository: Rezepte in einem Dictionary im Arbeitsspeicher"""
+
 from app.models import Rezept
 
 
@@ -8,7 +9,7 @@ class InMemoryRezeptRepository:
         self._naechste_id = 1
 
     def speichern(self, rezept: Rezept) -> Rezept:
-        if rezept.id is None:                
+        if rezept.id is None:
             rezept.id = self._naechste_id
             self._naechste_id += 1
         self._rezepte[rezept.id] = rezept
@@ -20,6 +21,6 @@ class InMemoryRezeptRepository:
     def alle(self) -> list[Rezept]:
         return list(self._rezepte.values())
 
-    def leeren(self):                        
+    def leeren(self):
         self._rezepte.clear()
         self._naechste_id = 1

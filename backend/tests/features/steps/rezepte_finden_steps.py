@@ -1,9 +1,12 @@
+# behave-Decorators (given/when/then) sind Objekte mit __call__; Pylint erkennt das
+# nicht und meldet faelschlich E1102 (Falsch-Positiv, siehe docs/spec/static-analysis.md)
+# pylint: disable=not-callable
 from behave import given, when, then
 from app.rezept_service import EingabeFehler, RezeptEingabe, ZutatEingabe
 
 
 def liste(text):
-    """ "Tomate, Zwiebel" -> ["Tomate", "Zwiebel"] """
+    """ "Tomate, Zwiebel" -> ["Tomate", "Zwiebel"]"""
     return [teil.strip() for teil in text.split(",") if teil.strip()]
 
 

@@ -47,6 +47,20 @@ behave tests/features # nur die BDD-Akzeptanztests (Lab 5)
 
 Die Tests brauchen weder die PostgreSQL-Datenbank noch den Kalender-Dienst.
 
+## Statische Analyse ausführen (Lab 6)
+
+Pylint und ruff sind in `requirements-dev.txt` enthalten (siehe oben), die Konfiguration liegt in `backend/pyproject.toml`. Im Ordner `backend/` mit aktivierter `.venv`:
+
+```bash
+ruff format --check .           # meldet nicht formatierte Dateien (< 1 s)
+ruff format --diff .            # zeigt die Änderungen, ohne sie anzuwenden
+ruff format .                   # formatiert alle Dateien automatisch
+
+pylint app tests run_tests.py   # Linter mit Note 0–10 (ca. 30 s)
+```
+
+Erwarteter Stand: `20 files already formatted` und `Your code has been rated at 10.00/10`. Begründung, Ergebnisse und Bewertung: [spec/static-analysis.md](spec/static-analysis.md).
+
 ## Frontend starten
 
 ```bash

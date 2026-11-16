@@ -1,6 +1,10 @@
 [tool.pylint.main]
 py-version = "3.12"
 
+[tool.pylint.format]
+# gleiche Zeilenlänge wie ruff, damit sich die beiden Tools nicht widersprechen
+max-line-length = 100
+
 [tool.pylint."messages control"]
 disable = [
     # Docstrings: Docstrings sind nicht vereinbart
@@ -10,6 +14,9 @@ disable = [
     "too-few-public-methods",
 ]
 
+[tool.ruff]
+line-length = 100
+
 [tool.ruff.format]
 quote-style = "double"
-indent-style = "tab"
+indent-style = "space"
