@@ -93,7 +93,7 @@ Use this template together with the review process you selected from the present
 |:--------:|---------------------------------------------------------------------------|-------|
 | 1 | Max, app.md | MA |
 | 2 | Isabel, requirements.md, quality.md | IS |
-| 3 | Fabian | <!--  --> |
+| 3 | Fabian, unit tests (UNI): `FocusFlow.Tests/Models/*`, `UnitTest1.cs`, checked against `Models/*.cs`, `Service/TaskService.cs`, requirements.md, test-strategy.md | FA |
 | 4 | Manuel, Gherkin feature files (GHE)| MH |
 | 5 | Sefa | <!--  --> |
 
@@ -151,7 +151,11 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 | F-13 | all .feature files, StepDefinitions/*.cs | Scenarios describe UI behavior , but the step definitions only check the service / in-memory repository, so e.g. "auf dem Dashboard angezeigt" is never actually verified | defect | minor | open | - | - |
 | F-14 | Task_verschieben.feature, Task_erstellen.feature, Kommentar_ergänzen.feature | Given steps are narrative instead of preconditions "Brille nicht an", "Aufgabe falsch verstanden" and contain asserts; test values (51 / 201 characters) are hidden in the step code instead of a Scenario Outline with Examples | suggestion | minor | open | - | - |
 | F-15 | all .feature files | Incomplete sentences "gültige Werte in das Formular eingetragen", "flasch", "kommplett", "aktuallisiert" | defect | editorial | open | - | - |
-
+| F-16 | `TaskItemTest.cs` test `TaskItem_WithoutDueDate_IsInvalid`, `Models/TaskItem.cs` | In requirements.md the due date is optional. But in the model the due date is required, and the unit test checks that a task without a due date is invalid. So the test checks the wrong behaviour | defect | major | open | - | - |
+| F-17 | `Service/TaskService.cs`, `Service/NotesService.cs` | There are no unit tests for the services. The service does not check the allowed status changes from requirements.md, for example a task can go directly from "To Do" to "Done". No test would find this. The mock library NSubstitute is installed but not used, although test-strategy.md says that unit tests use mocks | defect | major | open | - | - |
+| F-18 | `TaskItemTest.cs`, `Service/TaskService.cs` | The unit tests use the status "Open". But the service only accepts "To Do", "In Progress" and "Done", so it would reject "Open". requirements.md uses other names again ("Offen", "In Arbeit", "Fertig"). Related to F-007 and F-12 | defect | minor | open | - | - |
+| F-19 | `Models/TaskItem.cs`, `TaskItemTest.cs` | Priority and status can be any text, for example `Priority = "xyz"` is accepted. requirements.md defines fixed values, but there is no check and no unit test for wrong values | defect | minor | open | - | - |
+| F-20 | `UnitTest1.cs` | This test is empty and has no assert, so it always passes. It makes the number of passed tests look higher. It should be deleted | defect | minor | open | - | - |
 
 ---
 
