@@ -96,7 +96,7 @@ Use this template together with the review process you selected from the present
 | 2 | Isabel, requirements.md, quality.md | IS |
 | 3 | Fabian, unit tests (UNI): `FocusFlow.Tests/Models/*`, `UnitTest1.cs`, checked against `Models/*.cs`, `Service/TaskService.cs`, requirements.md, test-strategy.md | FA |
 | 4 | Manuel, Gherkin feature files (GHE)| MH |
-| 5 | Sefa | <!--  --> |
+| 5 | Sefa, backend (BAC), checked against requirements.md, quality.md, use-cases.md | SE |
 
 
 ### 2.6 Kick-off
@@ -157,6 +157,15 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 | F-019 | `TaskItemTest.cs`, `Service/TaskService.cs` | The unit tests use the status "Open". But the service only accepts "To Do", "In Progress" and "Done", so it would reject "Open". requirements.md uses other names again ("Offen", "In Arbeit", "Fertig"). Related to F-007 and F-013 | defect | minor | open | - | - |
 | F-020 | `Models/TaskItem.cs`, `TaskItemTest.cs` | Priority and status can be any text, for example `Priority = "xyz"` is accepted. requirements.md defines fixed values, but there is no check and no unit test for wrong values | defect | minor | open | - | - |
 | F-021 | `UnitTest1.cs` | This test is empty and has no assert, so it always passes. It makes the number of passed tests look higher. It should be deleted | defect | minor | open | - | - |
+| F-022 | Backend `TaskItem.cs`, `TaskService.cs`, `CreateTaskItemDto.cs`; requirements.md | Backend deviates from requirements: status values "Open"/"To Do" instead of "Offen/In Arbeit/Fertig", any status transition allowed, no "Overdue", due date is required (optional in requirements), priority not validated. See F-017 to F-020 | defect | major | open | - | - |
+| F-023 | `CreateTaskItemDto.cs`, use-cases.md "Notiz hinzufügen" | `Note` is `[Required]`, but the note is optional in the use case | defect | minor | open | - | - |
+| F-024 | `UpdateTaskItemDto.cs`, `TaskService.UpdateAsync`, `TaskItemController` | PUT with an empty or too long title throws `ArgumentException`, which is not caught, so the API returns 500 instead of 400. The update DTO has no validation attributes, unlike the create DTO | defect | minor | open | - | - |
+| F-025 | `TaskItemController.Create` | Returns the entity `TaskItem` instead of a response DTO; `[JsonIgnore]` in `TaskNotes` is a workaround | suggestion | minor | open | - | - |
+| F-026 | `TaskNotes.cs`, data-model.md | Names differ: class `TaskNotes`, property `notesId`, field `Description`, but the data model says `Note`, `Id`, `Content` | defect | minor | open | - | - |
+| F-027 | `TaskItemController`, `NotesController` | Inconsistent routes: `v1/TaskItem` vs `v1/tasks/{id}/notes` | suggestion | minor | open | - | - |
+| F-028 | `Program.cs` | `UseCors` and `UseRouting` come after `UseAuthorization` (recommended order: routing, CORS, authorization); no authentication configured | suggestion | minor | open | - | - |
+| F-029 | `NotesService.CreateAsync` | Return type is not nullable but `null` is returned; `GetByIdAsync` loads all notes just to check that the task exists | suggestion | minor | open | - | - |
+| F-030 | Backend vs requirements.md, quality.md | Not in the backend yet: login/password hash, description, categories, assignment, notifications, and no interface for the e-mail service that quality.md wants to mock. Intentionally postponed? | question | minor | open | - | - |
 
 ---
 
@@ -167,7 +176,7 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 | Metric | Value | Notes |
 |--------|-------|-------|
 | Size of review object | 185 dateien, 92 ordner | focus-flow zip file |
-| Number of findings (initial) | 21 | 5 major, 12 minor, 4 editorial; by type: 14 defects, 5 suggestions, 2 questions |
+| Number of findings (initial) | 30 | 6 major, 20 minor, 4 editorial; by type: 18 defects, 9 suggestions, 3 questions |
 | Number of findings after meeting | not determined | No consolidation meeting was held; the findings were not re-rated after the walkthrough. |
 
 
@@ -183,7 +192,8 @@ The reviewed project is an application for managing tasks. The outcome contained
 ### 5.2 Review outcome
 
 - **Review object state after review:** unchanged<!-- e.g. accepted with changes, requires re-inspection, not accepted -->
-- **Major risks or themes:** the BDD and unit tests are weaker than they look: the scenarios may contain no executable steps (F-010), use cases and the external dependency are not covered (F-011, F-012), and the services are not unit tested (F-018)<!-- bullet list -->
+- **Major risks or themes:** the BDD and unit tests are weaker than they look: the scenarios may contain no executable steps (F-010), use cases and the external dependency are not covered (F-011, F-012), and the services are not unit tested (F-018); the backend deviates from requirements.md 
+in status values, transitions and priority (F-022).<!-- bullet list -->
 
 ### 5.3 Decisions and follow-up
 
