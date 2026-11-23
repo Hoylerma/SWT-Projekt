@@ -24,7 +24,7 @@ Use this template together with the review process you selected from the present
 |--------|---------|
 | **MP** | Master Plan |
 | **DS** | Data Summary |
-| **LoF** | Level of Findings |
+| **LoF** | List of Findings |
 | **RR** | Review Report |
 
 ### Phases of a review / inspection
@@ -65,7 +65,7 @@ Use this template together with the review process you selected from the present
 | 3 | quality.md | QUA |
 | 4 | unit tests | UNI |
 | 5 | gherkin feature files| GHE |
-| 6 | irgendwa sim backend | BAC |
+| 6 | backend | BAC |
 
 ### 2.3 Reference documents
 
@@ -83,7 +83,8 @@ Use this template together with the review process you selected from the present
 | # | Checklists / scenarios |
 |---|-------------------------|
 | 1 | use cases for gherkin and feature files use-cases.md |
-| 2 | <!-- e.g. REST error-handling scenario list. --> |
+| 2 | Consistency check across documents: terms, statuses (Offen / In Arbeit / Fertig) and the external dependency (e-mail) in app.md, requirements.md, quality.md and the code must match |
+| 3 | Unit tests checked against requirements.md and test-strategy.md (are the requirements covered, do the tests check the right behaviour) |
 
 ### 2.5 Reviewer assignment
 
@@ -104,7 +105,7 @@ Use this template together with the review process you selected from the present
 
 | Date / time / location |
 |------------------------|
-| <!-- e.g. 2026-04-22 14:00 CET, Room X / video link --> |
+| No joint kick-off. The Master Plan was agreed informally in the team; each reviewer prepared individually. |
 
 ### 2.7 Individual preparation
 
@@ -121,7 +122,7 @@ Use this template together with the review process you selected from the present
 
 | Date / time / location |
 |------------------------|
-| <!-- e.g. 2026-04-25 10:00 CET, Room Y / video link --> |
+| 12 November 2026: walkthrough with group 3 (the author presented the project, reviewers presented their findings). No separate internal team meeting to consolidate findings. |
 
 
 
@@ -143,19 +144,19 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 | F-006 | requirements.md, section prioritäten | the usability of the priority is not documented | suggestion | editorial | open | - | - |
 | F-007 | requirements.md & app.md  | Task-Zustände and checkTask define the same statuses with different labels | suggestion | minor | open | - | - |
 | F-008 | quality.md, section qualitätsmodell | it is only stated that a secure hash is intended to be used, but no defintion of what secure means or by which standards a hash will be chosen | question | minor | open | - | author stated that database isn't implemented yet |
-| F-008 | quality.md, section qualitätsmodell | unclear definition of the messbar cell of wartbarkeit | suggestion | minor | open | - | author agreed |
-| F-09 | all `Gherkin-Szenarien/*.feature` | German keywords (Angenommen, Wenn, Dann) are used without a `# language: de` header; with the default English parser the step lines are read as scenario description, so the scenarios would contain no executable steps and the 7 "passed" BDD tests would verify nothing  | defect | major | open | - | - |
-| F-10 | Gherkin-Szenarien, use-cases.md | Several use cases have no scenarios: "Nutzer anmelden", "Aufgabe zuweisen" and most of "Eingaben prüfen"  | defect | major | open | - | - |
-| F-11 | Gherkin-Szenarien, quality.md "Zuverlässigkeit" / "Testbarkeit" | No scenario covers the external dependency (e-mail notifications / reminders) or its simulated outage| defect | major | open | - | - |
-| F-12 | Task_verschieben.feature, requirements.md, use-cases.md | Scenarios use the statuses "To Do" / "In Progress" / "Overdue", while requirements.md and use-cases.md use "Offen" / "In Arbeit" / "Fertig"; the transition to "Done" is not covered | defect | minor | open | - | - |
-| F-13 | all .feature files, StepDefinitions/*.cs | Scenarios describe UI behavior , but the step definitions only check the service / in-memory repository, so e.g. "auf dem Dashboard angezeigt" is never actually verified | defect | minor | open | - | - |
-| F-14 | Task_verschieben.feature, Task_erstellen.feature, Kommentar_ergänzen.feature | Given steps are narrative instead of preconditions "Brille nicht an", "Aufgabe falsch verstanden" and contain asserts; test values (51 / 201 characters) are hidden in the step code instead of a Scenario Outline with Examples | suggestion | minor | open | - | - |
-| F-15 | all .feature files | Incomplete sentences "gültige Werte in das Formular eingetragen", "flasch", "kommplett", "aktuallisiert" | defect | editorial | open | - | - |
-| F-16 | `TaskItemTest.cs` test `TaskItem_WithoutDueDate_IsInvalid`, `Models/TaskItem.cs` | In requirements.md the due date is optional. But in the model the due date is required, and the unit test checks that a task without a due date is invalid. So the test checks the wrong behaviour | defect | major | open | - | - |
-| F-17 | `Service/TaskService.cs`, `Service/NotesService.cs` | There are no unit tests for the services. The service does not check the allowed status changes from requirements.md, for example a task can go directly from "To Do" to "Done". No test would find this. The mock library NSubstitute is installed but not used, although test-strategy.md says that unit tests use mocks | defect | major | open | - | - |
-| F-18 | `TaskItemTest.cs`, `Service/TaskService.cs` | The unit tests use the status "Open". But the service only accepts "To Do", "In Progress" and "Done", so it would reject "Open". requirements.md uses other names again ("Offen", "In Arbeit", "Fertig"). Related to F-007 and F-12 | defect | minor | open | - | - |
-| F-19 | `Models/TaskItem.cs`, `TaskItemTest.cs` | Priority and status can be any text, for example `Priority = "xyz"` is accepted. requirements.md defines fixed values, but there is no check and no unit test for wrong values | defect | minor | open | - | - |
-| F-20 | `UnitTest1.cs` | This test is empty and has no assert, so it always passes. It makes the number of passed tests look higher. It should be deleted | defect | minor | open | - | - |
+| F-009 | quality.md, section qualitätsmodell | unclear definition of the messbar cell of wartbarkeit | suggestion | minor | open | - | author agreed |
+| F-010 | all `Gherkin-Szenarien/*.feature` | German keywords (Angenommen, Wenn, Dann) are used without a `# language: de` header; with the default English parser the step lines are read as scenario description, so the scenarios would contain no executable steps and the 7 "passed" BDD tests would verify nothing  | defect | major | open | - | - |
+| F-011 | Gherkin-Szenarien, use-cases.md | Several use cases have no scenarios: "Nutzer anmelden", "Aufgabe zuweisen" and most of "Eingaben prüfen"  | defect | major | open | - | - |
+| F-012 | Gherkin-Szenarien, quality.md "Zuverlässigkeit" / "Testbarkeit" | No scenario covers the external dependency (e-mail notifications / reminders) or its simulated outage| defect | major | open | - | - |
+| F-013 | Task_verschieben.feature, requirements.md, use-cases.md | Scenarios use the statuses "To Do" / "In Progress" / "Overdue", while requirements.md and use-cases.md use "Offen" / "In Arbeit" / "Fertig"; the transition to "Done" is not covered | defect | minor | open | - | - |
+| F-014 | all .feature files, StepDefinitions/*.cs | Scenarios describe UI behavior , but the step definitions only check the service / in-memory repository, so e.g. "auf dem Dashboard angezeigt" is never actually verified | defect | minor | open | - | - |
+| F-015 | Task_verschieben.feature, Task_erstellen.feature, Kommentar_ergänzen.feature | Given steps are narrative instead of preconditions "Brille nicht an", "Aufgabe falsch verstanden" and contain asserts; test values (51 / 201 characters) are hidden in the step code instead of a Scenario Outline with Examples | suggestion | minor | open | - | - |
+| F-016 | all .feature files | Incomplete sentences "gültige Werte in das Formular eingetragen", "flasch", "kommplett", "aktuallisiert" | defect | editorial | open | - | - |
+| F-017 | `TaskItemTest.cs` test `TaskItem_WithoutDueDate_IsInvalid`, `Models/TaskItem.cs` | In requirements.md the due date is optional. But in the model the due date is required, and the unit test checks that a task without a due date is invalid. So the test checks the wrong behaviour | defect | major | open | - | - |
+| F-018 | `Service/TaskService.cs`, `Service/NotesService.cs` | There are no unit tests for the services. The service does not check the allowed status changes from requirements.md, for example a task can go directly from "To Do" to "Done". No test would find this. The mock library NSubstitute is installed but not used, although test-strategy.md says that unit tests use mocks | defect | major | open | - | - |
+| F-019 | `TaskItemTest.cs`, `Service/TaskService.cs` | The unit tests use the status "Open". But the service only accepts "To Do", "In Progress" and "Done", so it would reject "Open". requirements.md uses other names again ("Offen", "In Arbeit", "Fertig"). Related to F-007 and F-013 | defect | minor | open | - | - |
+| F-020 | `Models/TaskItem.cs`, `TaskItemTest.cs` | Priority and status can be any text, for example `Priority = "xyz"` is accepted. requirements.md defines fixed values, but there is no check and no unit test for wrong values | defect | minor | open | - | - |
+| F-021 | `UnitTest1.cs` | This test is empty and has no assert, so it always passes. It makes the number of passed tests look higher. It should be deleted | defect | minor | open | - | - |
 
 ---
 
@@ -166,30 +167,29 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 | Metric | Value | Notes |
 |--------|-------|-------|
 | Size of review object | 185 dateien, 92 ordner | focus-flow zip file |
-| Number of findings (initial) | 4 | muss noch angepast werden is bishe rnur von isi und max |
-| Number of findings after meeting | <!-- --> | <!-- --> |
+| Number of findings (initial) | 21 | 5 major, 12 minor, 4 editorial; by type: 14 defects, 5 suggestions, 2 questions |
+| Number of findings after meeting | not determined | No consolidation meeting was held; the findings were not re-rated after the walkthrough. |
 
 
 ---
 
 ## 5. Review Report (RR)
-4
 ### 5.1 Summary
 
 <!-- Short executive summary: object reviewed, outcome, overall quality impression. -->
-The reviewed project is an application for managing tasks. The outcome contained some minor erros and mistakes that could overall be easily fixed and only provide minor disturbances. The impression of the quality left on the reviewers was altogether good. No major deficiences were detected, the author seemed to know their project and what they want to achieve with it.
+The reviewed project is an application for managing tasks. The outcome contained some minor erros and mistakes that could overall be easily fixed and only provide minor disturbances. The impression of the quality left on the reviewers was altogether good. The documents (F-001 to F-009) only have minor or editorial issues. In the tests (Gherkin files and unit tests) we found 5 major findings (F-010, F-011, F-012, F-017, F-018), for example the missing language header in the feature files and a unit test that checks the wrong behaviour. The author seemed to know their project and what they want to achieve with it.
 
 
 ### 5.2 Review outcome
 
 - **Review object state after review:** unchanged<!-- e.g. accepted with changes, requires re-inspection, not accepted -->
-- **Major risks or themes:** none<!-- bullet list -->
+- **Major risks or themes:** the BDD and unit tests are weaker than they look: the scenarios may contain no executable steps (F-010), use cases and the external dependency are not covered (F-011, F-012), and the services are not unit tested (F-018)<!-- bullet list -->
 
 ### 5.3 Decisions and follow-up
 
 | Topic | Decision | Responsible | Due date |
 |-------|----------|-------------|----------|
-| <!-- --> | <!-- --> | <!-- --> | <!-- --> |
+| All findings | Handed over to group 3 as feedback. No follow-up meeting was held, so no decisions or due dates were agreed. | group 3 (author) | - |
 
 ### 5.4 Positive observations (optional)
 
@@ -199,13 +199,6 @@ struktur von den aufgaben wurd egut eingehalten
 ### 5.5 Lessons learned (optional)
 
 <!-- Process improvements for the next review. -->
-
-### 5.6 Sign-off
-
-| Role | Name | Signature / date |
-|------|------|------------------|
-| Moderator | Max | <!-- --> |
-| Author | Florian | <!-- --> |
 
 ---
 
