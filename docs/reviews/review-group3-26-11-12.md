@@ -138,12 +138,12 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 |----|-------------------------------------|---------|------|----------|--------|-------|--------------------------|
 | F-001 | app.md, section external dependency | external dependency is marked as sms, but in further documents it was changed to e-mail | defect | minor | open | - | author knew of this |
 | F-002 | app.md, section usecase | defined target audience doesn't equal the one from the brief | defect | minor | open | - | author knew of this |
-| F-003 | app.md | intended implementation of login isn't dodumented | question | editorial | open | - | - |
+| F-003 | app.md | intended implementation of login isn't documented | question | editorial | open | - | - |
 | F-004 | requirements.md, section erinnerungen | it is only documented in the external dependency that reminders happen through a mail system, section reminders should also state that | suggestion | editorial | open | - | - |
 | F-005 | requirements.md, section testnutzer | the list of required data for test users does not list passwords | defect | minor | open | - | - | 
 | F-006 | requirements.md, section prioritäten | the usability of the priority is not documented | suggestion | editorial | open | - | - |
 | F-007 | requirements.md & app.md  | Task-Zustände and checkTask define the same statuses with different labels | suggestion | minor | open | - | - |
-| F-008 | quality.md, section qualitätsmodell | it is only stated that a secure hash is intended to be used, but no defintion of what secure means or by which standards a hash will be chosen | question | minor | open | - | author stated that database isn't implemented yet |
+| F-008 | quality.md, section qualitätsmodell | it is only stated that a secure hash is intended to be used, but no definition of what secure means or by which standards a hash will be chosen | question | minor | open | - | author stated that database isn't implemented yet |
 | F-009 | quality.md, section qualitätsmodell | unclear definition of the messbar cell of wartbarkeit | suggestion | minor | open | - | author agreed |
 | F-010 | all `Gherkin-Szenarien/*.feature` | German keywords (Angenommen, Wenn, Dann) are used without a `# language: de` header; with the default English parser the step lines are read as scenario description, so the scenarios would contain no executable steps and the 7 "passed" BDD tests would verify nothing  | defect | major | open | - | - |
 | F-011 | Gherkin-Szenarien, use-cases.md | Several use cases have no scenarios: "Nutzer anmelden", "Aufgabe zuweisen" and most of "Eingaben prüfen"  | defect | major | open | - | - |
@@ -186,7 +186,7 @@ Suggested values: **Type** — defect, question, suggestion; **Severity** — bl
 ### 5.1 Summary
 
 <!-- Short executive summary: object reviewed, outcome, overall quality impression. -->
-The reviewed project is an application for managing tasks. The outcome contained some minor erros and mistakes that could overall be easily fixed and only provide minor disturbances. The impression of the quality left on the reviewers was altogether good. The documents (F-001 to F-009) only have minor or editorial issues. In the tests (Gherkin files and unit tests) we found 5 major findings (F-010, F-011, F-012, F-017, F-018), for example the missing language header in the feature files and a unit test that checks the wrong behaviour. The author seemed to know their project and what they want to achieve with it.
+The reviewed project is an application for managing tasks. The outcome contained some minor errors and mistakes that could overall be easily fixed and only provide minor disturbances. The impression of the quality left on the reviewers was altogether good. The documents (F-001 to F-009) only have minor or editorial issues. In the tests (Gherkin files and unit tests) we found 5 major findings (F-010, F-011, F-012, F-017, F-018), for example the missing language header in the feature files and a unit test that checks the wrong behaviour. The author seemed to know their project and what they want to achieve with it.
 
 
 ### 5.2 Review outcome
@@ -204,7 +204,7 @@ in status values, transitions and priority (F-022).<!-- bullet list -->
 ### 5.4 Positive observations (optional)
 
 <!-- What was done well; good practices worth keeping. -->
-struktur von den aufgaben wurd egut eingehalten
+The structure of the tasks was followed well.
 
 ### 5.5 Lessons learned (optional)
 
