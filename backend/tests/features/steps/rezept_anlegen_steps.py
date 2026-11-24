@@ -1,3 +1,6 @@
+# behave-Decorators (given/when/then) sind Objekte mit __call__; Pylint erkennt das
+# nicht und meldet faelschlich E1102 (Falsch-Positiv, siehe docs/spec/static-analysis.md)
+# pylint: disable=not-callable
 from behave import given, when, then
 from app.rezept_service import EingabeFehler, RezeptEingabe, ZutatEingabe
 
@@ -7,7 +10,10 @@ def step_bestand_leer(context):
     context.repository.leeren()
 
 
-@when('ein WG Mitglied ein Rezept "{name}" für {portionen:d} Portionen mit der Saison "{saison}" anlegt')
+@when(
+    'ein WG Mitglied ein Rezept "{name}" für {portionen:d} Portionen '
+    'mit der Saison "{saison}" anlegt'
+)
 def step_rezept_mit_saison(context, name, portionen, saison):
     context.eingabe = RezeptEingabe(name, portionen, saison)
 

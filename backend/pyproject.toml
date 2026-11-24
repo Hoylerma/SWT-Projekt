@@ -1,0 +1,23 @@
+[tool.pylint.main]
+py-version = "3.12"
+
+[tool.pylint.format]
+# gleiche Zeilenlänge wie ruff, damit sich die beiden Tools nicht widersprechen
+max-line-length = 100
+
+[tool.pylint."messages control"]
+disable = [
+    # Docstrings: Docstrings sind nicht vereinbart
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "too-few-public-methods",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

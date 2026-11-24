@@ -1,4 +1,5 @@
 """Stub für den Kalender-Dienst mit festen Antworten."""
+
 from app.kalender import KalenderDienstFehler
 
 
@@ -6,7 +7,6 @@ class KalenderDienstStub:
     def __init__(self):
         self.zuruecksetzen()
 
-   
     def liefere_datum(self, datum: str):
         self._antwort = datum
         self._fehler = None
@@ -23,11 +23,9 @@ class KalenderDienstStub:
         self._antwort = None
         self._fehler = None
 
-   
     def aktuelles_datum(self) -> str:
         if self._fehler is not None:
             raise self._fehler
         if self._antwort is None:
-            
             raise RuntimeError("KalenderDienstStub ist nicht konfiguriert")
         return self._antwort

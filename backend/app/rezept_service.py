@@ -2,6 +2,7 @@
 Bekommt Repository und Kalender-Dienst über ihre Schnittstellen im Konstruktor.
 Lab 5: Fake + Stub aus den Tests. Lab 8: echtes Repository + Mock bzw. echter Dienst.
 KI GENERIERT CLaude Opus 5.5"""
+
 from dataclasses import dataclass, field
 from datetime import date
 from fractions import Fraction
@@ -31,6 +32,7 @@ class RezeptNichtGefunden(LookupError):
 
 # ---------- Ein- und Ausgabe-Objekte ----------
 
+
 @dataclass
 class ZutatEingabe:
     name: str
@@ -41,6 +43,7 @@ class ZutatEingabe:
 @dataclass
 class RezeptEingabe:
     """Was der Nutzer zum Anlegen eingibt (in Lab 8 der Request-Body der API)."""
+
     name: str
     portionen: int
     saison: str | None = None
@@ -59,19 +62,19 @@ class Treffer:
         return Fraction(self.abgedeckt, self.gesamt)
 
     @property
-    def abdeckung_text(self) -> str:                      # FR-10: "3 von 3"
+    def abdeckung_text(self) -> str:  # FR-10: "3 von 3"
         return f"{self.abgedeckt} von {self.gesamt}"
 
     @property
-    def kennzeichnung(self) -> str | None:                # FR-10: "vollständig"
+    def kennzeichnung(self) -> str | None:  # FR-10: "vollständig"
         return "vollständig" if self.abgedeckt == self.gesamt else None
 
 
 @dataclass(frozen=True)
 class Suchergebnis:
     treffer: tuple[Treffer, ...]
-    meldung: str | None = None                            # z. B. "Keine passenden Rezepte gefunden"
-    hinweis: str | None = None                            # z. B. Saison nicht verfügbar
+    meldung: str | None = None  # z. B. "Keine passenden Rezepte gefunden"
+    hinweis: str | None = None  # z. B. Saison nicht verfügbar
 
 
 def _schluessel(text: str) -> str:
@@ -81,6 +84,7 @@ def _schluessel(text: str) -> str:
 
 # ---------- Der Service ----------
 
+
 class RezeptService:
     def __init__(self, repository: RezeptRepository, kalender: KalenderDienst):
         self._repository = repository
@@ -89,15 +93,15 @@ class RezeptService:
     # ----- UC-03 Rezept anlegen (FR-01, FR-02, FR-14) -----
 
     def rezept_anlegen(self, eingabe: RezeptEingabe) -> Rezept:
-        self._pruefe_rezept(eingabe)                       # erst alles prüfen ...
+        self._pruefe_rezept(eingabe)  # erst alles prüfen ...
         rezept = Rezept(
             name=eingabe.name.strip(),
             portionen=eingabe.portionen,
-            saison=eingabe.saison or GANZJAEHRIG,          # Standard: ganzjährig
+            saison=eingabe.saison or GANZJAEHRIG,  # Standard: ganzjährig
         )
         for z in eingabe.zutaten:
             rezept.add_zutat(z.name.strip(), z.menge, z.einheit)
-        return self._repository.speichern(rezept)          # ... dann speichern
+        return self._repository.speichern(rezept)  # ... dann speichern
 
     def _pruefe_rezept(self, eingabe: RezeptEingabe):
         name = (eingabe.name or "").strip()
@@ -152,12 +156,14 @@ class RezeptService:
         if not treffer:
             return Suchergebnis(treffer=(), meldung=MELDUNG_KEINE_TREFFER)
 
-        aktuelle_saison = self._aktuelle_saison()          # fragt den Kalender-Dienst
-        treffer.sort(key=lambda t: (
-            -t.abdeckung,                                  # 1. Abdeckung absteigend
-            self._saison_rang(t.rezept.saison, aktuelle_saison),  # 2. Saison
-            _schluessel(t.rezept.name),                    # 3. alphabetisch
-        ))
+        aktuelle_saison = self._aktuelle_saison()  # fragt den Kalender-Dienst
+        treffer.sort(
+            key=lambda t: (
+                -t.abdeckung,  # 1. Abdeckung absteigend
+                self._saison_rang(t.rezept.saison, aktuelle_saison),  # 2. Saison
+                _schluessel(t.rezept.name),  # 3. alphabetisch
+            )
+        )
         hinweis = HINWEIS_OHNE_SAISON if aktuelle_saison is None else None
         return Suchergebnis(treffer=tuple(treffer), hinweis=hinweis)
 
@@ -167,7 +173,7 @@ class RezeptService:
         gesamt = len(rezept.zutaten)
         abgedeckt = gesamt - len(fehlende)
         if abgedeckt == 0:
-            return None                                    # FR-08: nur Abdeckung > 0
+            return None  # FR-08: nur Abdeckung > 0
         return Treffer(rezept, abgedeckt, gesamt, fehlende)
 
     def _aktuelle_saison(self) -> str | None:
@@ -180,7 +186,7 @@ class RezeptService:
     @staticmethod
     def _saison_rang(saison: str, aktuelle: str | None) -> int:
         if aktuelle is None:
-            return 0                                       # ohne Saison zählt das Kriterium nicht
+            return 0  # ohne Saison zählt das Kriterium nicht
         if saison == aktuelle:
             return 0
         if saison == GANZJAEHRIG:
