@@ -10,12 +10,14 @@
 | Zutatenname | EC-4 | invalid | ingredient may only appear once per recipe | "Tomato", "tomato" |
 
 | Parameter | Class ID | Class Type | Partition Description | Representative Test Value |
+|---|---|---|---|---|
 | Zutatenanzahl | EC-5 | valid | lenght from 1 - 99999 characters | 3 |
 | Zutatenanzahl | EC-6 | invalid | input other then a number | "a" |
 | Zutatenanzahl | EC-7 | invalid | greater 99999 | "100000" |
 | Zutatenanzahl | EC-8 | invalid | no character or empty | "" |
 
 | Parameter | Class ID | Class Type | Partition Description | Representative Test Value |
+|---|---|---|---|---|
 | Zutateneinheit | EC-9| valid | dropdown list | "ml" |
 | Zutateneinheit | EC-10 | invalid | no selection | "" |
 
