@@ -33,7 +33,10 @@
 - EC-9: Eine Auswahl zwischen 7 gegebenen Möglichkeiten ist, deshalb ist die Auswahl nicht relevant für Validierung. (FR-02)
 - EC-10: Ein leeres Pflichtfeld ist der typische Bedienfehler. Keine Auswahl führt zum Fehler. (FR-14)
 
-| Parameter | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-| Zutatenname | valid | invalid | valid | invalid | valid | invalid | valid | invalid |
-| Menge | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-| Einheit | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| Nr | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|---|
+| Zutatenname "tomato" | valid | invalid | valid | invalid | valid | invalid | valid | invalid |
+| Menge "3" | valid | valid | invalid | invalid | valid | valid | invalid | invalid |
+| Einheit "ml" | valid | valid | valid | valid | invalid | invalid | invalid | invalid |
+| Result | valid | invalid | invalid | invalid | invalid | invalid | invalid | invalid |
+| FR | 02 | 14 | 14 | 14 | 14 | 14 | 14 | 14 |
